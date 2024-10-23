@@ -1,0 +1,82 @@
+.icons {
+  color: #808080;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.nav_bar {
+  background-color: #2a2a2a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 10px 10px;
+}
+.nav_logo {
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.drop_options {
+  z-index: 50 !important;
+}
+
+.nav_logo img {
+  width: 130px;
+}
+
+.nav_items ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.cta_btn {
+  background-color: #24b47e;
+  color: #fefefe;
+  padding: 7px 15px;
+  border-radius: 7px;
+  font-weight: 600;
+}
+
+.profile_dropdown {
+  border: 1px solid #808080;
+  padding: 2px 5px;
+  border-radius: 100%;
+  display: inline-block;
+  max-width: max-content;
+  max-height: max-content;
+  color: #808080;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.profile_dropdown_menu {
+  background-color: #2a2a2a;
+  /* z-index: 30 !important; */
+}
+
+.profile_dropdown_menu a {
+  color: #fefefe;
+}
+
+@media only screen and (max-width: 576px) {
+  .nav_bar {
+    padding: 10px 20px 10px 2px;
+  }
+
+  .toggler,
+  .search,
+  .mode {
+    display: none;
+  }
+
+  .cta_btn {
+    display: none;
+  }
+
+  .scrolling {
+    display: none !important;
+  }
+}

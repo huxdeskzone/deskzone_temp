@@ -1,0 +1,27 @@
+.bottom_nav {
+  display: none;
+}
+
+@media only screen and (max-width: 576px) {
+  .bottom_nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #2a2a2a;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .icons {
+    color: #808080;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .scrolling {
+    display: none !important;
+  }
+}

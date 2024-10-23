@@ -1,0 +1,40 @@
+.carousel {
+  position: fixed;
+  top: 3.6rem;
+  left: 4rem;
+  right: 0;
+  border-bottom: 1px solid #323232;
+  padding: 15px 10px 15px 10px;
+  background-color: #323232;
+  z-index: -1;
+  background-color: #181818;
+}
+.skill {
+  background-color: #323232;
+  display: inline-block !important;
+  max-width: max-content !important;
+  padding: 5px 14px;
+  color: #fefef3;
+  font-weight: 600;
+  font-size: 12px;
+  border-radius: 15px;
+  border-bottom: 2px solid #323232;
+  border: 1px solid #3e3e3e;
+  white-space: nowrap;
+}
+
+.current_skill {
+  background-color: #fefef3;
+  color: #323232;
+}
+
+@media only screen and (max-width: 635px) {
+  .carousel {
+    margin-left: 10px;
+    margin-right: 10px;
+    position: fixed;
+    top: 3.6rem;
+    left: 0;
+    right: 0;
+  }
+}

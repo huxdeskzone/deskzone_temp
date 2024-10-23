@@ -1,0 +1,18 @@
+.side_nav {
+  background-color: #2a2a2a;
+}
+
+.mobile_sidebar {
+  background-color: #2a2a2a;
+}
+
+.active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+
+@media only screen and (max-width: 576px) {
+  .side_nav {
+    display: none;
+  }
+}

@@ -1,0 +1,49 @@
+.top_experts {
+  opacity: 1;
+  transform: "none";
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 37 37 / var(--tw-bg-opacity));
+}
+
+.contact_icon {
+  color: #24b47e;
+}
+
+.intro_text {
+  color: #fefefe;
+}
+
+.contact_label_text {
+  color: #a3a1a1;
+}
+
+.top_experts:hover {
+  transform: translateY(0px) scale(1.05) scaleX(1) translateZ(0px);
+}
+
+.top_experts:hover .expert_name {
+  color: #24b47e;
+}
+
+.expert_name {
+  color: #fefefe;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.expert_product {
+  color: #a3a1a1;
+  font-size: 10px;
+  font-weight: 600;
+}
+.cover_overlay {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.expert_nav_active {
+  color: #fefefe;
+}
+
+.expert_nav {
+  color: #a3a1a1;
+}

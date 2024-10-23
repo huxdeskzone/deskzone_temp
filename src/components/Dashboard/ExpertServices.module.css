@@ -1,0 +1,49 @@
+.services_card {
+  background-color: #181818;
+  border: 2px solid #474646;
+  border-radius: 20px;
+}
+
+.services_card img {
+  border-radius: 20px 20px 0 0;
+}
+
+.preview {
+  height: 80%;
+  border-radius: 20px 20px 0 0;
+}
+
+.details_btn {
+  background-color: #24b47e;
+  color: #f3f3f3;
+}
+
+.service_info p {
+  color: #f3f3f3;
+  font-weight: 400;
+  width: 170px; /* adjust width as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.service_info a {
+  color: #706e6e;
+  font-weight: 600;
+}
+
+.price_col {
+  color: #24b47e;
+  font-weight: 700;
+  font-size: 1rem;
+  background-color: #323232;
+  padding: 3px 10px;
+  height: fit-content;
+  border-radius: 20px;
+}
+
+/* @media only screen and (max-width: 1795px) {
+  .service_info p {
+    font-size: 10px;
+  }
+} */

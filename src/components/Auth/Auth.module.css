@@ -1,0 +1,59 @@
+.auth_form_container {
+  --tw-bg-opacity: 1;
+  background-color: rgb(42 42 42 / var(--tw-bg-opacity));
+}
+
+.form_label {
+  color: #a8a6a6;
+  font-size: 13px;
+}
+
+.form_input {
+  background-color: transparent !important;
+  border: 1px solid #a8a6a6;
+  border-radius: 0;
+}
+
+.form_input::placeholder {
+  color: #fefefe;
+}
+
+.form_input:focus {
+  border: none;
+}
+
+.form_btn {
+  background-color: #24b47e;
+}
+
+.account {
+  color: #24b47e;
+}
+
+.account:hover {
+  color: #fefefe;
+}
+
+.options {
+  color: #fefefe;
+  background-color: #181818;
+  opacity: 0.8;
+}
+
+.error_identifier {
+  border: 1px solid rgb(153 27 27 / var(--tw-text-opacity)) !important;
+}
+
+.options:hover {
+  background-color: #24b47e !important;
+}
+
+.resend_link {
+  color: #a8a6a6;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.resend_link:hover {
+  color: #fefefe;
+}

@@ -1,0 +1,22 @@
+.modal_body {
+  background-color: #fefefe;
+  /* padding: 10px 20px;
+  text-align: center;
+  border-radius: 20px; */
+  border-radius: 20px;
+}
+
+.modal_btn {
+  background-color: #3fd97f;
+  color: #fefefe;
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 10px;
+}
+
+.icon {
+  color: #3fd97f;
+  border: 1px solid #3fd97f;
+  border-radius: 100%;
+  padding: 2px 7px;
+}
