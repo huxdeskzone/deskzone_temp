@@ -1,13 +1,15 @@
 .carousel {
   position: fixed;
-  top: 3.6rem;
+  top: 4.3rem;
   left: 4rem;
   right: 0;
-  border-bottom: 1px solid #323232;
-  padding: 15px 10px 15px 10px;
-  background-color: #323232;
+  border-bottom: 1px solid;
+  padding: 20px 10px;
   z-index: -1;
-  background-color: #181818;
+  --tw-border-opacity: 1;
+  border-color: rgb(42 42 42 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 24 24 / var(--tw-bg-opacity));
 }
 .skill {
   background-color: #323232;
@@ -23,17 +25,60 @@
   white-space: nowrap;
 }
 
+.skill:hover {
+  background-color: #464646;
+  transition: ease-in-out 0.4s;
+}
+
 .current_skill {
   background-color: #fefef3;
   color: #323232;
 }
 
+.current_skill:hover {
+  background-color: #fefef3 !important;
+  color: #323232 !important;
+}
+
+.carousel_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.carousel_items {
+  width: 93%;
+  margin: 0 auto;
+}
+
+/* .carousel_items::before,
+.carousel_items::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 30px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.carousel_items::before {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.carousel_items::after {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+} */
+
 @media only screen and (max-width: 635px) {
   .carousel {
-    margin-left: 10px;
-    margin-right: 10px;
+    /* margin-left: 10px;
+    margin-right: 10px; */
     position: fixed;
-    top: 3.6rem;
+    top: 4.3rem;
     left: 0;
     right: 0;
   }

@@ -1,8 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-// import redisClient from "../../helpers/redisConfig";
-import { storeToken } from "../../helpers/firebase";
+import { getToken, storeToken } from "../../helpers/firebase";
 import { useLoginUserMutation } from "../../lib/apis/authApi";
 import { useGetCurrentUserMutation } from "../../lib/apis/userApi";
 import { useResendVerificationTokenMutation } from "../../lib/apis/authApi";
@@ -73,16 +72,14 @@ const LoginForm: React.FC = () => {
   useEffect(() => {
     const onLoginSuccess = async () => {
       const result = await storeToken(data?.data?.accessToken);
-      // await addData();
-      // if (result) {
-      localStorage.setItem("r_t", data?.data?.refreshToken);
-      localStorage.setItem("a_t", data?.data?.accessToken);
-      // }
+
+      if (result) {
+        localStorage.setItem("r_t", data?.data?.refreshToken);
+        getCurrentUser(data?.data?.accessToken);
+      }
     };
     if (isSuccess) {
-      getCurrentUser(data?.data?.accessToken);
       onLoginSuccess();
-
       navigate("/");
     }
   }, [isSuccess]);

@@ -10,12 +10,13 @@ export interface IMobileSideBarProps {
 }
 
 export interface IServicesProps {
-  id: string;
-  businessName: string;
-  service: string;
-  price: number;
-  servicePoster: string;
-  businessLogo: string;
+  id?: string;
+  businessName?: string;
+  service?: string;
+  price?: number;
+  servicePoster?: string;
+  businessLogo?: string;
+  serviceVideo?: string;
 }
 
 export interface IModalOverlayProps {
@@ -34,6 +35,8 @@ export interface IProtectedRouteProps {
 export interface ICloseBtnProps {
   onToggleModal?: () => void;
   formTitle?: string;
+  service?: string;
+  businessLogo?: string;
 }
 
 export interface IExpertApplicationState {
@@ -51,7 +54,6 @@ export interface IExpertApplicationAction {
 }
 
 export interface IBusinessDetailsProps {
-  onChangeBusinessName: (businessName: string) => void;
   onChangeAbout: (about: string) => void;
   businessName?: string;
   about?: string;

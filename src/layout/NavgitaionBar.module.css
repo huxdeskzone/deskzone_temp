@@ -5,11 +5,18 @@
 }
 
 .nav_bar {
-  background-color: #2a2a2a;
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 37 37 / var(--tw-bg-opacity));
+  height: 70px;
+  --tw-border-opacity: 1;
+  border-color: rgb(42 42 42 / var(--tw-border-opacity));
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px 10px 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 .nav_logo {
   /* display: flex;
@@ -37,19 +44,32 @@
   color: #fefefe;
   padding: 7px 15px;
   border-radius: 7px;
-  font-weight: 600;
+  font-weight: 500;
+}
+
+.cta_btn:hover {
+  background-color: #16a36f;
+  transition: ease-in-out 0.5s;
 }
 
 .profile_dropdown {
-  border: 1px solid #808080;
-  padding: 2px 5px;
-  border-radius: 100%;
-  display: inline-block;
-  max-width: max-content;
-  max-height: max-content;
   color: #808080;
   font-weight: 600;
-  font-size: 0.7rem;
+}
+
+.profile_dropdown:hover {
+  color: #f5f4f4;
+  transition: ease-in-out 0.3s;
+}
+
+.search i:hover {
+  color: #f5f4f4;
+  transition: ease-in-out 0.3s;
+}
+
+.mode i:hover {
+  color: #f5f4f4;
+  transition: ease-in-out 0.3s;
 }
 
 .profile_dropdown_menu {

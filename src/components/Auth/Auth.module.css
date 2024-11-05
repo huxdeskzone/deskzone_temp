@@ -19,11 +19,18 @@
 }
 
 .form_input:focus {
-  border: none;
+  border-color: #24b47e; /* Change border color */
+  outline: none;
+  transition: all 0.3s ease; /* Smooth transition */
 }
 
 .form_btn {
   background-color: #24b47e;
+}
+
+.form_btn:hover {
+  background-color: #16a36f;
+  transition: ease-in-out 0.5s;
 }
 
 .account {
@@ -56,4 +63,10 @@
 
 .resend_link:hover {
   color: #fefefe;
+}
+
+@media only screen and (max-width: 639px) {
+  .name_div {
+    margin-bottom: 20px;
+  }
 }

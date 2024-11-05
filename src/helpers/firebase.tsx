@@ -1,7 +1,4 @@
 import axios from "axios";
-// import { collection, addDoc } from "firebase/firestore";
-// import db from "./firebaseConfig";
-
 const API_URL = "https://cme-msdmps.firebaseio.com";
 
 export const storeToken = async (token: string) => {
@@ -10,33 +7,31 @@ export const storeToken = async (token: string) => {
       accessToken: token,
     });
 
+    localStorage.setItem("u_t", response.data.name);
     return response.data.name;
   } catch (error) {}
 };
 
 export const getToken = async () => {
   try {
-    const token = localStorage.getItem("a_t");
+    const id = localStorage.getItem("u_t");
+    if (id) {
+      const response = await axios.get(`${API_URL}/authData/${id}.json`);
 
-    // if (id) {
-    //   const response = await axios.get(`${API_URL}/authData/${id}.json`);
-    //   return response?.data?.accessToken;
-    // }
-    return token;
+      return response?.data?.accessToken;
+    }
   } catch (error) {}
 };
 
 export const deleteToken = async () => {
   try {
-    // const id = localStorage.getItem("u_t");
+    const id = localStorage.getItem("u_t");
 
-    // if (id) {
-    //   await axios.delete(`${API_URL}/authData/${id}.json`);
-    //   localStorage.removeItem("r_t");
-    //   localStorage.removeItem("u_t");
-    // }
-    localStorage.removeItem("r_t");
-    localStorage.removeItem("a_t");
+    if (id) {
+      await axios.delete(`${API_URL}/authData/${id}.json`);
+      localStorage.removeItem("r_t");
+      localStorage.removeItem("u_t");
+    }
   } catch (error) {}
 };
 
@@ -49,20 +44,3 @@ export const getRefreshToken = (token: string): string => {
 
   return "";
 };
-
-// const addDocument = async () => {
-//   try {
-//     const docRef = await addDoc(collection(db, "users"), {
-//       username: "Abideen",
-//     });
-//     console.log("Document written with ID: ", docRef.id);
-//   } catch (e) {
-//     console.error("Error adding document: ", e);
-//   }
-// };
-
-// const onAddUser = async () => {
-//   await addDocument();
-// };
-
-// onAddUser();

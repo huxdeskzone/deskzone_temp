@@ -1,23 +1,16 @@
-import { useReducer, useContext, useEffect } from "react";
+import { useState, useReducer, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateExpertMutation } from "../../lib/apis/expertApis";
-import { getToken } from "../../helpers/firebase";
-import Error from "../commons/Error";
-import SuccessModal from "../commons/SuccessModal";
-import ExpertApplicationProgress from "./ExpertApplicationProgress";
-import BusinessLogo from "./BusinessLogo";
-import BusinessCoverImage from "./BusinessCoverImage";
-import { ModalContext } from "../../context/modal-context";
 import { IExpertApplicationAction } from "../../interfaces/propsInterfaces";
-import { IExpertApplicationState } from "../../interfaces/propsInterfaces";
 import BusinessDetails from "./BusinessDetails";
+import SuccessModal from "../commons/SuccessModal";
+import ErrorModal from "../commons/ErrorModal";
+import { IExpertApplicationState } from "../../interfaces/propsInterfaces";
 import useFormValidation from "../../hooks/useFormValidation";
 import FormButton from "../commons/FormButton";
-import CloseFormModalBtn from "../commons/CloseFormModalBtn";
 import styles from "./Expert.module.css";
-
-interface IOnMoveNextEvent
-  extends React.MouseEvent<HTMLButtonElement, MouseEvent> {}
+import BusinessLogo from "./BusinessLogo";
+import BusinessCoverImage from "./BusinessCoverImage";
 
 const expertApplicationReducer = (
   state: IExpertApplicationState,
@@ -29,20 +22,6 @@ const expertApplicationReducer = (
 
     case "ABOUT_ME":
       return { ...state, about: action.payload };
-
-    case "MOVE_NEXT":
-      return {
-        ...state,
-        stage: state.stage + 1,
-        percentage: Number(action.payload),
-      };
-
-    case "MOVE_PREV":
-      return {
-        ...state,
-        stage: state.stage - 1,
-        percentage: Number(action.payload),
-      };
 
     case "LOGO":
       return {
@@ -63,10 +42,10 @@ const ExpertApplicationForm: React.FC = () => {
   const [createExpert, { data, error, isSuccess, isLoading, isError }] =
     useCreateExpertMutation();
 
-  const navigate = useNavigate();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [errorModalIsOpen, setErrorModalIsOpen] = useState(false);
 
-  // modal context
-  const modalCtx = useContext(ModalContext);
+  const navigate = useNavigate();
 
   // validate registration form hook
   const [formIsValid, formError, validateFormInputs] = useFormValidation() as [
@@ -88,10 +67,10 @@ const ExpertApplicationForm: React.FC = () => {
   );
 
   // change business name function
-  const onChangeBusinessName = (businessName: string) => {
+  const onChangeBusinessName = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: "BUSINESS_NAME",
-      payload: businessName,
+      payload: event.target.value,
     });
   };
 
@@ -107,34 +86,6 @@ const ExpertApplicationForm: React.FC = () => {
 
   const onSelectCoverImage = (coverImage: any) => {
     dispatch({ type: "COVER_IMAGE", payload: coverImage });
-  };
-
-  // move to next stage function
-  const onMoveNext = (event: IOnMoveNextEvent): void => {
-    event.preventDefault();
-
-    if (expertApplicationState.stage >= 3) {
-      return;
-    }
-
-    dispatch({
-      type: "MOVE_NEXT",
-      payload: expertApplicationState.stage === 1 ? "50" : "100",
-    });
-  };
-
-  // move to previous stage function
-  const onMovePrev = (event: IOnMoveNextEvent): void => {
-    event.preventDefault();
-
-    if (expertApplicationState.stage <= 1) {
-      return;
-    }
-
-    dispatch({
-      type: "MOVE_PREV",
-      payload: expertApplicationState.stage === 1 ? "100" : "50",
-    });
   };
 
   useEffect(() => {
@@ -158,12 +109,6 @@ const ExpertApplicationForm: React.FC = () => {
   ) => {
     event.preventDefault();
 
-    const token = await getToken();
-
-    if (!token) {
-      return console.log("token expired");
-    }
-
     if (!formIsValid) {
       return;
     }
@@ -177,104 +122,124 @@ const ExpertApplicationForm: React.FC = () => {
       expertApplicationState?.businessName || ""
     );
 
-    await createExpert({ expertData: formData, accessToken: token });
+    await createExpert({ expertData: formData });
   };
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      setModalIsOpen(true);
+    }
+  }, [isSuccess, data]);
+
+  useEffect(() => {
+    if (isError && error) {
+      setErrorModalIsOpen(true);
+    }
+  }, [isError, error]);
 
   return (
     <>
-      {isSuccess && <SuccessModal />}
-      {!isSuccess && (
-        <div
-          className={`relative p-5 w-full max-w-4xl h-fit ${styles.auth_form_container}`}
-        >
-          <div className="relative rounded-lg shadow">
-            <CloseFormModalBtn
-              onToggleModal={() => {
-                modalCtx.toggleModal("expert");
-                navigate("/");
-              }}
-              formTitle="Apply to become an Expert"
-            />
+      {modalIsOpen && (
+        <SuccessModal
+          message="Application successful, you can start creating service on DeskZone."
+          open={modalIsOpen}
+          onCloseModal={() => navigate("/expert/profile")}
+        />
+      )}
 
-            <ExpertApplicationProgress
-              progressStage={expertApplicationState.stage}
-              percentageCompletion={expertApplicationState.percentage}
-            />
+      {errorModalIsOpen && (
+        <ErrorModal
+          message="Application failed"
+          buttonText="Try Again"
+          open={errorModalIsOpen}
+          onCloseModal={() => setErrorModalIsOpen(false)}
+        />
+      )}
 
-            <div className="px-4 mt-10  md:px-5">
-              {/* backend Api error */}
-              {isError &&
-                error &&
-                "data" in error &&
-                typeof error.data === "object" &&
-                error.data !== null &&
-                "message" in error.data &&
-                (error.data as { message: string }).message
-                  .split(":")
-                  .map((msg, index) => (
-                    <Error
-                      key={index}
-                      message={msg || "something went wrong"}
-                    />
-                  ))}
-
-              <form
-                className="space-y-4"
-                action="#"
-                onSubmit={onFormSubmitHandler}
-              >
-                {expertApplicationState?.stage === 1 && (
-                  <BusinessDetails
-                    onChangeAbout={onChangeAbout}
-                    onChangeBusinessName={onChangeBusinessName}
-                    businessName={expertApplicationState.businessName}
-                    about={expertApplicationState.about}
-                    formError={formError}
-                  />
-                )}
-                {expertApplicationState?.stage === 2 && (
-                  <BusinessLogo
-                    onSelectLogo={onSelectLogo}
-                    selectedLogo={expertApplicationState.logo}
-                  />
-                )}
-
-                {expertApplicationState.stage === 3 && (
-                  <BusinessCoverImage onSelectCoverImage={onSelectCoverImage} />
-                )}
-
-                {!formIsValid && (
-                  <div className="flex justify-between items-center">
-                    <button
-                      type="submit"
-                      className={` text-white  font-medium  text-sm px-5 py-2.5 text-center ${styles.form_btn} disabled:cursor-not-allowed`}
-                      onClick={(event) => onMovePrev(event as IOnMoveNextEvent)}
-                    >
-                      Prev
-                    </button>
-
-                    <button
-                      type="submit"
-                      className={` text-white  font-medium  text-sm px-5 py-2.5 text-center ${styles.form_btn} disabled:cursor-not-allowed`}
-                      onClick={(event) => onMoveNext(event as IOnMoveNextEvent)}
-                    >
-                      Next
-                    </button>
-                  </div>
-                )}
-
-                {formIsValid && (
-                  <FormButton
-                    isLoading={isLoading}
-                    formIsValid={formIsValid}
-                    textContent="Complete Application"
-                  />
-                )}
-              </form>
-            </div>
+      <div className={`relative ${styles.service_details}`}>
+        <div className={`${styles.close_container}  rounded-t`}>
+          <div className={styles.service_intro}>
+            <p className="md:text-3xl xl:text-4xl mb-1 text-lg">
+              Become an Expert on DeskZone
+            </p>
+            <h1 className="text-xs  md:text-sm">
+              We will help you earn good value from your skills.
+            </h1>
           </div>
         </div>
-      )}
+        <div
+          className={`${styles.service_form} flex justify-center h-4/5 overflow-y-auto`}
+        >
+          <div className="lg:w-3/4 px-5 lg:pr-5">
+            <h3 className="text-cyan-50 text-sm sm:text-2xl md:text-3xl">
+              Business Details
+            </h3>
+            <form onSubmit={onFormSubmitHandler}>
+              <div className="my-5">
+                <label
+                  htmlFor="service-title"
+                  className={`${styles.form_label} block mb-2  font-medium`}
+                ></label>
+
+                <span
+                  className={`${styles.required_field} flex gap-2 items-center  absolute ml-3 mt-1 text-sm `}
+                >
+                  Business name (required){" "}
+                  <a
+                    className={styles.input_info}
+                    href="#"
+                    data-title="A catchy business name can help you get the right clients for your business"
+                  >
+                    <i className="fa-regular w-4 h-4 fa-circle-question"></i>
+                  </a>
+                </span>
+                <input
+                  type="text"
+                  name="title"
+                  id="email"
+                  className={`${styles.form_input} ${
+                    formError.field === "businessName" && styles.error_border
+                  } text-sm block w-full  dark:text-white`}
+                  placeholder="Deskzone"
+                  onChange={onChangeBusinessName}
+                  // value={serviceTitle.title}
+                />
+                <span className="absolute left-3/4 -mt-6 -ml-12 text-fuchsia-200 text-sm">
+                  {expertApplicationState?.businessName?.length}/30
+                </span>
+              </div>
+
+              <div className="mb-5">
+                <BusinessDetails
+                  onChangeAbout={onChangeAbout}
+                  about={expertApplicationState.about}
+                  formError={formError}
+                />
+              </div>
+              <div className="w-full mt-10">
+                <div className="w-full mb-14">
+                  <BusinessLogo
+                    selectedLogo={expertApplicationState.logo}
+                    onSelectLogo={onSelectLogo}
+                  />
+                </div>
+
+                <div className="w-full">
+                  <BusinessCoverImage onSelectCoverImage={onSelectCoverImage} />
+                </div>
+              </div>
+
+              <div className="my-5">
+                <FormButton
+                  isLoading={isLoading}
+                  formIsValid={formIsValid}
+                  textContent="Submit Application"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

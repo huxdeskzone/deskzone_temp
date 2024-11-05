@@ -2,31 +2,44 @@ import { Suspense, lazy } from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import ModalOverlay from "../components/commons/ModalOverlay";
-import ExpertModalOverlay from "../components/commons/ExpertModalOverlay";
 import LoginForm from "../components/Auth/LoginForm";
 import SignupForm from "../components/Auth/SignupForm";
 import PasswordResetForm from "../components/Auth/PasswordResetForm";
 import VerificationForm from "../components/Auth/VerificationForm";
 import VerifyResetPasswordForm from "../components/Auth/VerifyResetPasswordForm";
-import ProtectedRoutes from "./ProrectedRoutes";
+import ProtectedRoutes from "./ProtectedRoutes";
 import UpdatePasswordForm from "../components/Auth/UpdatePasswordForm";
-import ExpertApplicationForm from "../components/Expert/ExpertApplicationForm";
 import ExpertProducts from "../components/TopExperts/ExpertProducts";
 import TopExpertContact from "../components/TopExperts/TopExpertContacts";
 import TopExpertsAbout from "../components/TopExperts/TopExpertsAbout";
 import TopExpertsHelp from "../components/TopExperts/TopExpertsHelp";
 import TopExpertTerms from "../components/TopExperts/TopExpertsTerms";
+import ExpertRoutes from "./ExpertRoutes";
+import Profile from "../components/Profile/Expert/Profile";
+import Products from "../components/Profile/Expert/Products";
+import ClientGeneralProfile from "../components/Profile/Client/Profile";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const TopExpertsPage = lazy(() => import("../pages/TopExpertsPage"));
-const ExpertDetailsPage = lazy(() => import("../pages/ExpertDetailsPage"));
 
-const ProfilePage = lazy(() => import("../pages/ProfilePage"));
+const ServiceDetailsPage = lazy(() => import("../pages/ServiceDetailsPage"));
+
+const ExpertDetailsPage = lazy(() => import("../pages/ExpertDetailsPage"));
+const CreateServicePage = lazy(() => import("../pages/CreateServicePage"));
+
+const ClientProfilePage = lazy(() => import("../pages/ClientProfilePage"));
+const ExpertProfilePage = lazy(() => import("../pages/ExpertProfilePage"));
+
+const ExpertApplicationPage = lazy(
+  () => import("../pages/ExpertApplicationPage")
+);
+
+const ServiceNegotationPage = lazy(
+  () => import("../pages/ServiceNegotationPage")
+);
 
 const AppRoutes: React.FC = () => {
   const { user } = useSelector((state: any) => state.userState);
-
-  // let user = "Emmanuel";
 
   return (
     <Routes>
@@ -40,43 +53,55 @@ const AppRoutes: React.FC = () => {
       >
         <Route
           path="auth/login"
-          element={<ModalOverlay children={<LoginForm />} />}
+          element={
+            <Suspense fallback={<></>}>
+              <ModalOverlay children={<LoginForm />} />
+            </Suspense>
+          }
         />
 
         <Route
           path="auth/sign-up"
-          element={<ModalOverlay children={<SignupForm />} />}
+          element={
+            <Suspense fallback={<></>}>
+              <ModalOverlay children={<SignupForm />} />
+            </Suspense>
+          }
         />
 
         <Route
           path="auth/verify"
-          element={<ModalOverlay children={<VerificationForm />} />}
+          element={
+            <Suspense fallback={<></>}>
+              <ModalOverlay children={<VerificationForm />} />
+            </Suspense>
+          }
         />
 
         <Route
           path="auth/password/reset"
-          element={<ModalOverlay children={<PasswordResetForm />} />}
+          element={
+            <Suspense fallback={<></>}>
+              <ModalOverlay children={<PasswordResetForm />} />
+            </Suspense>
+          }
         />
 
         <Route
           path="auth/password/reset/verify"
-          element={<ModalOverlay children={<VerifyResetPasswordForm />} />}
+          element={
+            <Suspense fallback={<></>}>
+              <ModalOverlay children={<VerifyResetPasswordForm />} />
+            </Suspense>
+          }
         />
 
         <Route
           path="auth/password/update"
-          element={<ModalOverlay children={<UpdatePasswordForm />} />}
-        />
-
-        <Route
-          path="/expert/application"
           element={
-            <ProtectedRoutes
-              user={user}
-              children={
-                <ExpertModalOverlay children={<ExpertApplicationForm />} />
-              }
-            />
+            <Suspense fallback={<></>}>
+              <ModalOverlay children={<UpdatePasswordForm />} />
+            </Suspense>
           }
         />
       </Route>
@@ -98,21 +123,143 @@ const AppRoutes: React.FC = () => {
           </Suspense>
         }
       >
-        <Route path="products" element={<ExpertProducts />} />
-        <Route path="about" element={<TopExpertsAbout />} />
-        <Route path="help" element={<TopExpertsHelp />} />
-        <Route path="contact-us" element={<TopExpertContact />} />
-        <Route path="terms" element={<TopExpertTerms />} />
+        <Route
+          path="products"
+          element={
+            <Suspense fallback={<></>}>
+              <ExpertProducts />
+            </Suspense>
+          }
+        />
+        <Route
+          path="about"
+          element={
+            <Suspense fallback={<></>}>
+              <TopExpertsAbout />
+            </Suspense>
+          }
+        />
+        <Route
+          path="help"
+          element={
+            <Suspense fallback={<></>}>
+              <TopExpertsHelp />
+            </Suspense>
+          }
+        />
+        <Route
+          path="contact-us"
+          element={
+            <Suspense fallback={<></>}>
+              <TopExpertContact />
+            </Suspense>
+          }
+        />
+        <Route
+          path="terms"
+          element={
+            <Suspense fallback={<></>}>
+              <TopExpertTerms />
+            </Suspense>
+          }
+        />
       </Route>
 
       <Route
-        path="/expert/profile"
+        path="/products/:serviceName"
         element={
           <Suspense fallback={<></>}>
-            <ProfilePage />
+            <ServiceDetailsPage />{" "}
           </Suspense>
         }
-      ></Route>
+      />
+
+      <Route
+        path="/experts/application"
+        element={
+          <Suspense fallback={<></>}>
+            <ProtectedRoutes user={user} children={<ExpertApplicationPage />} />
+          </Suspense>
+        }
+      />
+
+      <Route
+        path="/client/profile"
+        element={
+          <Suspense fallback={<></>}>
+            <ProtectedRoutes user={user}>
+              <ClientProfilePage />
+            </ProtectedRoutes>
+          </Suspense>
+        }
+      >
+        <Route
+          path=""
+          element={
+            <Suspense fallback={<></>}>
+              {" "}
+              <ClientGeneralProfile />{" "}
+            </Suspense>
+          }
+        />
+      </Route>
+
+      <Route
+        path="/expert/profile/"
+        element={
+          <Suspense fallback={<></>}>
+            <ExpertRoutes user={user}>
+              <ExpertProfilePage />
+            </ExpertRoutes>
+          </Suspense>
+        }
+      >
+        <Route
+          path=""
+          element={
+            <Suspense fallback={<></>}>
+              <ExpertRoutes user={user}>
+                <Profile />
+              </ExpertRoutes>
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="products"
+          element={
+            <Suspense fallback={<></>}>
+              <ExpertRoutes user={user}>
+                <Products />
+              </ExpertRoutes>
+            </Suspense>
+          }
+        />
+      </Route>
+
+      <Route
+        path="/service/create"
+        element={
+          <Suspense fallback={<></>}>
+            <ExpertRoutes user={user}>
+              <CreateServicePage />
+            </ExpertRoutes>
+          </Suspense>
+        }
+      />
+
+      <Route
+        path="/messages/:messageId"
+        element={
+          <Suspense fallback={<></>}>
+            {" "}
+            <ProtectedRoutes user={user}>
+              {" "}
+              <ServiceNegotationPage />
+            </ProtectedRoutes>{" "}
+          </Suspense>
+        }
+      />
     </Routes>
   );
 };

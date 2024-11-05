@@ -2,6 +2,7 @@ import Icon from "../components/commons/Icon";
 import { IMobileSideBarProps } from "../interfaces/propsInterfaces";
 import styles from "./BottomNav.module.css";
 
+// ${isScrolling && styles.scrolling}
 const BottomNav: React.FC<IMobileSideBarProps> = ({
   isOpen,
   onOpenMobileSideBar = () => {},
@@ -9,15 +10,17 @@ const BottomNav: React.FC<IMobileSideBarProps> = ({
 }) => {
   return (
     <section
-      className={`${isScrolling && styles.scrolling} ${
-        styles.bottom_nav
-      } transition ease-in-out delay-150`}
+      className={` ${styles.bottom_nav} transition ease-in-out delay-150 z-50`}
     >
       <a href="#" type="button" className="cursor-pointer">
         <Icon iconClasses={`fa-solid fa-house ${styles.icons}`} />
       </a>
 
-      <a href="#">
+      <a
+        href="#"
+        data-modal-target="static-modal"
+        data-modal-toggle="static-modal"
+      >
         <Icon iconClasses={`fa-solid fa-magnifying-glass ${styles.icons}`} />
       </a>
 

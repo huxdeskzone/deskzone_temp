@@ -33,6 +33,14 @@ const ModalContextProvider = ({ children }: { children: ReactNode }) => {
 
       return setModal({ type, isOpen: true });
     }
+
+    if (type === "service") {
+      if (modal.isOpen) {
+        return setModal({ type, isOpen: false });
+      } else {
+        return setModal({ type, isOpen: true });
+      }
+    }
   };
 
   const value = {

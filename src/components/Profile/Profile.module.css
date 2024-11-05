@@ -1,0 +1,86 @@
+.profile_links {
+  color: #fefefe;
+}
+
+.profile_link_icon {
+  color: #c5c4c4;
+}
+
+.profile_nav_link:hover .profile_link_icon {
+  color: #fefefe;
+}
+
+.profile_sidebar {
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 37 37 / var(--tw-bg-opacity));
+
+  border-right: 1px solid #555454;
+}
+
+.profile_section {
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 37 37 / var(--tw-bg-opacity));
+}
+
+.active {
+  --tw-text-opacity: 1;
+  color: rgb(230 230 230 / var(--tw-text-opacity));
+
+  --tw-bg-opacity: 1;
+  background-color: rgb(50 50 50 / var(--tw-bg-opacity));
+}
+
+.logo_preview {
+  border-radius: 10px;
+  height: 100px;
+  width: 100px;
+}
+
+.logo_border {
+  border-color: #555454;
+}
+.profile_input {
+  border-color: #555454;
+}
+
+.form_label {
+  color: #8a8989;
+}
+
+.profile_input:focus {
+  border-color: #24b47e; /* Change border color */
+  outline: none;
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.profile_btn {
+  background-color: #24b47e;
+}
+
+.profile_btn2 {
+  background-color: #e24c4c;
+}
+
+.profile_btn3 {
+  background-color: #555454;
+}
+
+.disabled_input {
+  pointer-events: none; /* Makes input non-clickable */
+  opacity: 0.5; /* Reduces opacity to look disabled */
+  color: #fefefe !important;
+}
+.upload_btn {
+  padding: 3px;
+  border-radius: 50px;
+  position: absolute;
+  color: #555454;
+  margin-left: -30px;
+  margin-top: 30px;
+}
+
+.upload_btn:hover {
+  background-color: #555454;
+  color: #fefefe;
+  transition: ease-in-out 0.4s;
+}

@@ -231,11 +231,27 @@ const useFormValidation = () => {
         });
       }
 
+      if (formProps?.businessName.trim().length > 30) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "businessName",
+          error: "Business name should not be longer than 30 characters",
+        });
+      }
+
       if (formProps?.about.trim().length === 0) {
         setFormIsValid(false);
         return setFormError({
           field: "about",
           error: "Business about is required",
+        });
+      }
+
+      if (formProps?.about.trim().length > 150) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "about",
+          error: "about should not be longer than 100 characters",
         });
       }
 

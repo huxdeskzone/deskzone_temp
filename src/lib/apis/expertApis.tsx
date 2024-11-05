@@ -14,17 +14,21 @@ if (process.env.NODE_ENV === "development") {
 
 export const expertApis = createApi({
   reducerPath: "expertApis",
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({
+    baseUrl,
+    prepareHeaders: async (headers, { getState }) => {
+      const token = await getToken();
+      headers.set("Authorization", `Bearer ${token}`);
+      return headers;
+    },
+  }),
 
   endpoints: (builder) => ({
     createExpert: builder.mutation({
       query: (payload) => ({
         url: "/expert/create-expert",
         method: "POST",
-        body: payload.expertData,
-        headers: {
-          Authorization: `Bearer ${payload.accessToken}`,
-        },
+        body: payload,
       }),
 
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -39,33 +43,32 @@ export const expertApis = createApi({
         }
       },
     }),
+
+    getLoggedInExperts: builder.mutation({
+      query: () => ({
+        url: "/expert/profile",
+        method: "GET",
+      }),
+    }),
+
     createExpertFaq: builder.mutation({
       query: (payload) => ({
         url: "/expert/faq",
         method: "POST",
-        body: payload.faqData,
-        headers: {
-          Authorization: `Bearer ${payload.accessToken}`,
-        },
+        body: payload,
       }),
     }),
     updateSocialLinks: builder.mutation({
       query: (payload) => ({
         url: "/auth/login",
         method: "PATCH",
-        body: payload.socialLinks,
-        headers: {
-          Authorization: `Bearer ${payload.accessToken}`,
-        },
+        body: payload,
       }),
     }),
     getExpertFaqs: builder.mutation({
-      query: (payload) => ({
+      query: () => ({
         url: "/auth/resend-otp",
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${payload}`,
-        },
       }),
     }),
   }),
@@ -76,4 +79,5 @@ export const {
   useGetExpertFaqsMutation,
   useUpdateSocialLinksMutation,
   useCreateExpertMutation,
+  useGetLoggedInExpertsMutation,
 } = expertApis;

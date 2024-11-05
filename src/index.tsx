@@ -24,6 +24,7 @@ if (process.env.NODE_ENV === "development") {
 } else {
   CLIENT_ID = process.env.REACT_APP_PROD_GOOGLE_OAUTH_CLIENT_ID;
 }
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>

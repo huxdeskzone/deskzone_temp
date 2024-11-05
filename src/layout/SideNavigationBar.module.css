@@ -1,9 +1,11 @@
 .side_nav {
-  background-color: #2a2a2a;
+  --tw-bg-opacity: 1;
+  background-color: rgb(33 33 33 / var(--tw-bg-opacity));
 }
 
 .mobile_sidebar {
-  background-color: #2a2a2a;
+  --tw-bg-opacity: 1;
+  background-color: rgb(33 33 33 / var(--tw-bg-opacity));
 }
 
 .active {

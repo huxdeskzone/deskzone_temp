@@ -1,0 +1,30 @@
+.modal_backdrop {
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 37 37 / var(--tw-bg-opacity));
+}
+
+.search_container {
+  width: 93% !important;
+  margin: 0 auto !important;
+  --tw-border-opacity: 1;
+  border-color: rgb(62 62 62 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 37 37 / var(--tw-bg-opacity));
+}
+
+.search_input {
+  color: #f3f3f3;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.search_input::placeholder {
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important;
+  /* color: #555454; */
+}
+
+.clear_btn {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}

@@ -17,9 +17,9 @@
   color: #a3a1a1;
 }
 
-.top_experts:hover {
+/* .top_experts:hover {
   transform: translateY(0px) scale(1.05) scaleX(1) translateZ(0px);
-}
+} */
 
 .top_experts:hover .expert_name {
   color: #24b47e;

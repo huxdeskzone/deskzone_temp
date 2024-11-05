@@ -1,13 +1,14 @@
+import TopExpertsLoader from "../commons/TopExpertsLoader";
 import { experts } from "../../lib/dummy_data/dummyData";
-
 import styles from "./TopExperts.module.css";
 import { Link } from "react-router-dom";
 
 const TopExperts: React.FC = () => {
+  let loading = false;
   return (
     <div className="flex flex-grow flex-col px-4 pt-6 pb-10 md:px-6 lg:px-7 lg:pb-12 3xl:px-8">
-      <div className="mb-2 -mt-4 flex flex-col-reverse flex-wrap items-center justify-between bg-light-200 py-4 dark:bg-dark-100 md:mt-0 md:mb-5 md:flex-row md:space-x-4 md:bg-transparent md:py-0 md:dark:bg-transparent lg:mb-7">
-        <div className="relative my-5 w-full max-w-xs sm:mt-0">
+      <div className="mb-4 -mt-4 flex  flex-wrap items-center justify-between bg-light-200 py-4 dark:bg-dark-100 md:mt-0 md:mb-5 md:flex-row md:space-x-4 md:bg-transparent md:py-0 md:dark:bg-transparent lg:mb-7">
+        <div className="relative ml-5 my-5 w-full text-zinc-500 max-w-xs sm:mt-0">
           <svg
             viewBox="0 0 20 20"
             fill="none"
@@ -28,51 +29,55 @@ const TopExperts: React.FC = () => {
           />
         </div>
 
+        {loading && <TopExpertsLoader />}
+
         {/* Top Experts List */}
-        <div className="w-full">
-          <div className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-5 xl:grid-cols-6 gap-4 xs:grid-cols-[repeat(auto-fill,minmax(185px,1fr))] md:gap-5">
-            {experts.map((expert) => {
-              return (
-                <Link to={`/experts/${expert.name}/products`}>
-                  <div
-                    key={expert.id}
-                    className={`${styles.top_experts} group cursor-pointer rounded-md bg-light px-4 py-7 text-center`}
-                    tabIndex={0}
-                  >
-                    <div className="relative mx-auto mb-2.5 h-[75px] w-[75px] md:h-20 md:w-20 lg:h-[90px] lg:w-[90px]">
-                      <img
-                        alt="Maxicon Soft Tech"
-                        loading="lazy"
-                        decoding="async"
-                        data-nimg="fill"
-                        className="rounded-3xl object-cover"
-                        sizes="100vw"
-                        src={expert.imageUrl}
-                        style={{
-                          position: "absolute",
-                          height: "100%",
-                          width: "100%",
-                          inset: "0px",
-                          color: "transparent",
-                        }}
-                      />
-                    </div>
-                    <h3
-                      className={`mb-1 text-13px font-medium text-dark transition-colors ${styles.expert_name}`}
-                    >
-                      {expert.name}
-                    </h3>
+        {!loading && (
+          <div className="w-full">
+            <div className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-5 xl:grid-cols-6 gap-4 xs:grid-cols-[repeat(auto-fill,minmax(185px,1fr))] md:gap-5">
+              {experts.map((expert) => {
+                return (
+                  <Link to={`/experts/${expert.name}/products`}>
                     <div
-                      className={`font-medium text-dark-800 dark:text-dark-base ${styles.expert_product}`}
+                      key={expert.id}
+                      className={`${styles.top_experts} group cursor-pointer rounded-md bg-light px-4 py-7 text-center`}
+                      tabIndex={0}
                     >
-                      6 Products
+                      <div className="relative mx-auto mb-2.5 h-[75px] w-[75px] md:h-20 md:w-20 lg:h-[90px] lg:w-[90px]">
+                        <img
+                          alt="Maxicon Soft Tech"
+                          loading="lazy"
+                          decoding="async"
+                          data-nimg="fill"
+                          className="rounded-3xl object-cover"
+                          sizes="100vw"
+                          src={expert.imageUrl}
+                          style={{
+                            position: "absolute",
+                            height: "100%",
+                            width: "100%",
+                            inset: "0px",
+                            color: "transparent",
+                          }}
+                        />
+                      </div>
+                      <h3
+                        className={`mb-1 text-13px font-medium text-dark transition-colors ${styles.expert_name}`}
+                      >
+                        {expert.name}
+                      </h3>
+                      <div
+                        className={`font-medium text-dark-800 dark:text-dark-base ${styles.expert_product}`}
+                      >
+                        6 Products
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              );
-            })}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

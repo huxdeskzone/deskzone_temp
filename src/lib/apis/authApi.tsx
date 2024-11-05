@@ -85,9 +85,11 @@ export const authApi = createApi({
 
     getNewAccessToken: builder.mutation({
       query: (payload) => ({
-        url: "",
-        method: "GET",
-        body: payload,
+        url: "/auth/refresh-token",
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${payload}`,
+        },
       }),
 
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {

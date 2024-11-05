@@ -7,15 +7,15 @@ const SideNavigationBar: React.FC = () => {
 
   return (
     <section
-      className="fixed top-14 left-0 z-40 w-16 h-screen transition-transform -translate-x-full sm:translate-x-0"
+      className="fixed top-14 left-0  w-16 h-screen transition-transform -translate-x-full sm:translate-x-0"
       aria-label="Sidebar"
     >
       <div className={`h-full overflow-x-auto  ${styles.side_nav}`}>
-        <ul className="space-y-2  mt-3 flex flex-col  gap-5 font-medium">
+        <ul className="space-y-2  mt-8 flex flex-col  font-medium">
           <li
             className={`${
               !pathname.split(" ")[1] && styles.active
-            } text-center hover:bg-gray-100 dark:hover:bg-gray-700 w-full p-2 text-gray-900 rounded-lg dark:text-white`}
+            } text-center hover:bg-gray-100 dark:hover:bg-gray-700 w-full p-2 text-gray-900  dark:text-white`}
           >
             <Link to="/" title="HOME" className="group">
               <Icon
@@ -25,7 +25,7 @@ const SideNavigationBar: React.FC = () => {
               />
             </Link>
           </li>
-          <li className="text-center hover:bg-gray-100 dark:hover:bg-gray-700 w-full p-2 text-gray-900 rounded-lg dark:text-white ">
+          <li className="text-center hover:bg-gray-100 dark:hover:bg-gray-700 w-full p-2 text-gray-900  dark:text-white ">
             <Link to="#" title="EXPLORE" className="group">
               <Icon
                 iconClasses={
@@ -34,7 +34,7 @@ const SideNavigationBar: React.FC = () => {
               />
             </Link>
           </li>
-          <li className="text-center hover:bg-gray-100 dark:hover:bg-gray-700 w-full p-2 text-gray-900 rounded-lg dark:text-white ">
+          <li className="text-center hover:bg-gray-100 dark:hover:bg-gray-700 w-full p-2 text-gray-900  dark:text-white ">
             <Link to="#" title="POPULAR SERVICES" className="group">
               <Icon
                 iconClasses={
@@ -46,7 +46,7 @@ const SideNavigationBar: React.FC = () => {
           <li
             className={`${
               pathname.split("/")[1] === "experts" && styles.active
-            } text-center hover:bg-gray-100 dark:hover:bg-gray-700 w-full p-2 text-gray-900 rounded-lg dark:text-white`}
+            } text-center hover:bg-gray-100 dark:hover:bg-gray-700 w-full p-2 text-gray-900  dark:text-white`}
           >
             <Link to="/experts" title="TOP EXPERTS" className="group">
               <Icon
@@ -57,7 +57,7 @@ const SideNavigationBar: React.FC = () => {
               {/* <span className="flex-1 ms-3 whitespace-nowrap">Users</span> */}
             </Link>
           </li>
-          <li className="text-center hover:bg-gray-100 dark:hover:bg-gray-700 w-full p-2 text-gray-900 rounded-lg dark:text-white ">
+          <li className="text-center hover:bg-gray-100 dark:hover:bg-gray-700 w-full p-2 text-gray-900  dark:text-white ">
             <a href="#" title="CONTACT US" className="group">
               <Icon
                 iconClasses={

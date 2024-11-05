@@ -125,8 +125,8 @@ const SignupForm: React.FC = () => {
 
         <div className="px-4  md:px-5">
           <form onSubmit={onSubmitHandler} className="space-y-4" action="#">
-            <div className="flex max-md:gap-9 sm:justify-between items-center">
-              <div>
+            <div className="sm:flex max-md:gap-9 sm:justify-between items-center">
+              <div className={styles.name_div}>
                 <label
                   htmlFor="first-name"
                   className={`${styles.form_label}  mb-2  font-medium`}
