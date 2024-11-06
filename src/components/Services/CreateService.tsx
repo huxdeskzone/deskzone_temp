@@ -259,7 +259,7 @@ const CreateService: React.FC = () => {
           </div>
         </div>
         <div className={`${styles.service_form} flex justify-center`}>
-          <div className="lg:w-3/4 px-5 lg:pr-5">
+          <div className="w-3/4 px-5 lg:pr-5">
             <h3 className="text-cyan-50 text-sm sm:text-2xl md:text-3xl">
               Service Details
             </h3>
@@ -295,7 +295,7 @@ const CreateService: React.FC = () => {
                   onChange={changeServiceTitleHandler}
                   value={serviceTitle.title}
                 />
-                <span className="absolute left-3/4 -mt-6 -ml-12 text-fuchsia-200 text-sm">
+                <span className="absolute left-3/4  -mt-6 -ml-12 text-fuchsia-200 text-sm">
                   {serviceTitle?.title?.length}/{serviceTitle.totalCharacter}
                 </span>
               </div>

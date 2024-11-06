@@ -1,9 +1,8 @@
 import { useState, useEffect, useContext } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ModalContext } from "../../context/modal-context";
 import RequestServiceModal from "../Services/ReqeustServiceModal";
-import Notification from "../commons/Notification";
 import { useGetExpertServiceByIdMutation } from "../../lib/apis/serviceApis";
 import VideoPlayer from "./VideoPlayer";
 import RelatedServices from "./RelatedServices";
@@ -35,8 +34,6 @@ const ServiceDetails: React.FC = () => {
   const [getExpertServiceById, { data, isLoading, error }] =
     useGetExpertServiceByIdMutation();
 
-  const navigate = useNavigate();
-
   const { serviceName } = useParams();
 
   useEffect(() => {
@@ -55,7 +52,7 @@ const ServiceDetails: React.FC = () => {
         serviceDetail={serviceDetail || undefined}
         onCloseModal={() => setOpenModal(false)}
       />
-      <Notification />
+
       {isLoading && <ServiceDetailsLoader />}
       {!isLoading && (
         <div className={`relative my-28  w-full ${styles.service_details}`}>
@@ -111,7 +108,9 @@ const ServiceDetails: React.FC = () => {
                 Shopify etc to make our products special.
               </p>
 
-              <div className="flex space-x-6 border-t border-light-500 py-3 rtl:space-x-reverse dark:border-dark-500 md:py-4 3xl:py-5 mt-5">
+              <div
+                className={`${styles.border_color} flex space-x-6 border-t border-light-500 py-3 rtl:space-x-reverse dark:border-dark-500 md:py-4 3xl:py-5 mt-5`}
+              >
                 <div className="flex items-center tracking-[.1px] text-dark dark:text-light">
                   <svg
                     viewBox="0 0 18 18"
@@ -136,7 +135,9 @@ const ServiceDetails: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-4 text-13px border-t border-light-500 py-5 dark:border-dark-500 lg:py-6 3xl:py-10">
+              <div
+                className={`${styles.border_color} space-y-4 text-13px border-t border-light-500 py-5 dark:border-dark-500 lg:py-6 3xl:py-10`}
+              >
                 <div className="flex items-start text-dark dark:text-light">
                   <strong className="flex w-36 flex-shrink-0 items-center font-normal text-dark-600 dark:text-light-600">
                     <span className="w-8 flex-shrink-0 text-dark-900 dark:text-light-900">
@@ -239,7 +240,9 @@ const ServiceDetails: React.FC = () => {
                   </div>
                 </div> */}
               </div>
-              <div className="border-t border-light-500 pt-5 dark:border-dark-500 mt-5">
+              <div
+                className={`border-t border-light-500 pt-5 dark:border-dark-500 mt-5 ${styles.border_color}`}
+              >
                 <div className="flex text-13px gap-6 lg:items-center">
                   <div
                     className={`${styles.service_text1} flex-shrink-0 pt-2 ltr:pr-4 rtl:pl-4 rtl:text-right dark:text-light-600 sm:w-36 lg:pt-0`}
@@ -319,7 +322,7 @@ const ServiceDetails: React.FC = () => {
               <div className="mt-8">
                 {!user ? (
                   <Link
-                    className={`${styles.service_button} w-full  md:w-3/4  font-semibold duration-200 pointer-events-auto cursor-pointer opacity-100 min-h-[46px] sm:h-12 rounded py-3 px-4 md:px-5 bg-brand text-white hover:bg-brand-dark focus:bg-brand-dark relative   mt-2.5 flex-1 xs:mt-0`}
+                    className={`${styles.service_button} w-full    font-semibold duration-200 pointer-events-auto cursor-pointer opacity-100 min-h-[46px] sm:h-12 rounded py-3 px-4 md:px-5 bg-brand text-white hover:bg-brand-dark focus:bg-brand-dark relative   mt-2.5 flex-1 xs:mt-0`}
                     onClick={() => modalCtx.toggleModal("auth")}
                     to="/auth/login"
                     // disabled
@@ -328,7 +331,7 @@ const ServiceDetails: React.FC = () => {
                   </Link>
                 ) : (
                   <button
-                    className={`${styles.service_button} w-full  md:w-3/4  font-semibold duration-200 pointer-events-auto cursor-pointer opacity-100 min-h-[46px] sm:h-12 rounded py-3 px-4 md:px-5 bg-brand text-white hover:bg-brand-dark focus:bg-brand-dark relative   mt-2.5 flex-1 xs:mt-0`}
+                    className={`${styles.service_button} w-full  font-semibold duration-200 pointer-events-auto cursor-pointer opacity-100 min-h-[46px] sm:h-12 rounded py-3 px-4 md:px-5 bg-brand text-white hover:bg-brand-dark focus:bg-brand-dark relative   mt-2.5 flex-1 xs:mt-0`}
                     onClick={() => setOpenModal(true)}
                   >
                     Request Service ${serviceDetail?.price}

@@ -58,3 +58,36 @@ body {
   padding: 10px 12px; /* Add padding */
   border-radius: 100%; /* Make the buttons circular */
 }
+
+.MuiStack-root,
+.MuiFormControl-root {
+  width: 100% !important;
+  border: none !important;
+}
+
+.MuiStack-root:focus,
+.MuiFormControl-root:focus {
+  border: none !important;
+}
+
+.MuiInputBase-input {
+  border: 1px solid #a8a6a6 !important;
+  color: #ffffff;
+}
+
+.MuiInputBase-input::placeholder {
+  color: #ffffff !important;
+  z-index: 10;
+}
+
+.MuiInputBase-input:hover {
+  border-color: #24b47e !important; /* Change border color */
+  outline: none !important;
+  transition: all 0.3s ease !important; /* Smooth transition */
+}
+
+.MuiInputBase-input:focus {
+  border-color: #24b47e !important; /* Change border color */
+  outline: none !important;
+  transition: all 0.3s ease !important; /* Smooth transition */
+}

@@ -11,7 +11,7 @@ const VideoPlayer: React.FC<{ serviceVideo: string }> = ({ serviceVideo }) => {
   const [currentTimeSec, setCurrentTimeSec] = useState<number>(0);
   const [duration, setDuration] = useState([0, 0]);
   const [durationSec, setDurationSec] = useState<number>(0);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   const sec2Min = (sec: number): [number, number] => {
     const min = Math.floor(sec / 60);
@@ -69,81 +69,75 @@ const VideoPlayer: React.FC<{ serviceVideo: string }> = ({ serviceVideo }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.playerContainer}>
-        <video
-          className={styles.videoPlayer}
-          ref={videoRef}
-          src={serviceVideo}
-        />
+      {/* <div className={styles.playerContainer}> */}
+      <video
+        className={`${styles.videoPlayer} object-cover w-full h-full`}
+        ref={videoRef}
+        src={serviceVideo}
+        muted={isMuted}
+      />
 
-        {videoRef?.current && (
-          <div className={styles.controlsContainer}>
-            <div className={`${styles.timeline_container} -mt-12 mx-auto`}>
-              <input
-                type="range"
-                min="0"
-                max={durationSec}
-                value={currentTimeSec}
-                className={styles.timeline}
-                onChange={handleTimelineChange}
-              />
-            </div>
-            <div className={styles.controls}>
-              {isPlaying ? (
-                <button className={styles.controlButton} onClick={handlePlay}>
-                  <IconContext.Provider
-                    value={{ color: "white", size: "1.5em" }}
-                  >
-                    <BiPause />
-                  </IconContext.Provider>
-                </button>
-              ) : (
-                <button className={styles.controlButton} onClick={handlePlay}>
-                  <IconContext.Provider
-                    value={{ color: "white", size: "1.5em" }}
-                  >
-                    <BiPlay />
-                  </IconContext.Provider>
-                </button>
-              )}
+      {videoRef?.current && (
+        <div className={styles.controlsContainer}>
+          <div className={`${styles.timeline_container} -mt-12 mx-auto`}>
+            <input
+              type="range"
+              min="0"
+              max={durationSec}
+              value={currentTimeSec}
+              className={`${styles.timeline} appearance-none`}
+              onChange={handleTimelineChange}
+              disabled
+            />
+          </div>
+          <div className={styles.controls}>
+            {isPlaying ? (
+              <button className={styles.controlButton} onClick={handlePlay}>
+                <IconContext.Provider value={{ color: "white", size: "1.5em" }}>
+                  <BiPause />
+                </IconContext.Provider>
+              </button>
+            ) : (
+              <button className={styles.controlButton} onClick={handlePlay}>
+                <IconContext.Provider value={{ color: "white", size: "1.5em" }}>
+                  <BiPlay />
+                </IconContext.Provider>
+              </button>
+            )}
 
-              {isMuted && (
-                <button
-                  className={styles.controlButton2}
-                  onClick={handleMuteToggle}
-                >
-                  <IconContext.Provider
-                    value={{ color: "white", size: "1.2em" }}
-                  >
-                    <RiVolumeMuteLine />
-                  </IconContext.Provider>
-                </button>
-              )}
+            {isMuted && (
+              <button
+                className={styles.controlButton2}
+                onClick={handleMuteToggle}
+              >
+                <IconContext.Provider value={{ color: "white", size: "1.2em" }}>
+                  <RiVolumeMuteLine />
+                </IconContext.Provider>
+              </button>
+            )}
 
-              {!isMuted && (
-                <button
-                  className={styles.controlButton2}
-                  onClick={handleMuteToggle}
-                >
-                  <IconContext.Provider
-                    value={{ color: "white", size: "1.2em" }}
-                  >
-                    <AiOutlineMuted />
-                  </IconContext.Provider>
-                </button>
-              )}
+            {!isMuted && (
+              <button
+                className={styles.controlButton2}
+                onClick={handleMuteToggle}
+              >
+                <IconContext.Provider value={{ color: "white", size: "1.2em" }}>
+                  <AiOutlineMuted />
+                </IconContext.Provider>
+              </button>
+            )}
 
-              <div className={styles.duration}>
-                {currentTime[0].toString().padStart(2, "0")}:
-                {currentTime[1].toString().padStart(2, "0")} /{" "}
-                {duration[0].toString().padStart(2, "0")}:
-                {duration[1].toString().padStart(2, "0")}
-              </div>
+            <div className={styles.duration}>
+              {currentTime[0].toString().padStart(2, "0")}:
+              {currentTime[1].toString().padStart(2, "0")} /{" "}
+              {duration[0].toString().padStart(2, "0")}:
+              {duration[1].toString().padStart(2, "0")}
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
+    // </div>
   );
 };
 

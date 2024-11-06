@@ -44,16 +44,16 @@ const NavigationBar: React.FC = () => {
     onGetCurrentUser();
   }, [isSuccess]);
 
-  // useEffect(() => {
-  //   const checkServerHealth = async () => {
-  //     console.log("checking server health");
-  //     serverHealthCheck(null);
-  //   };
+  useEffect(() => {
+    const checkServerHealth = async () => {
+      console.log("checking server health");
+      serverHealthCheck(null);
+    };
 
-  //   setInterval(() => {
-  //     checkServerHealth();
-  //   }, 5000);
-  // }, []);
+    setInterval(() => {
+      checkServerHealth();
+    }, 5000);
+  }, []);
 
   useEffect(() => {
     const apiError =

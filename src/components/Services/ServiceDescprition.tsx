@@ -50,7 +50,7 @@ const ServiceDescription: React.FC<{
         mention={mention}
         hashtag={hashtag}
       />
-      <span className="absolute left-3/4 -mt-6 -ml-14 text-fuchsia-200 text-sm">
+      <span className="absolute left-3/4 -mt-6 -ml-16 text-fuchsia-200 text-sm">
         {descLen}/600
       </span>
     </div>

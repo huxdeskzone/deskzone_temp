@@ -1,3 +1,9 @@
+.modal_overlay {
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9) !important;
+}
+
 .auth_form_container {
   --tw-bg-opacity: 1;
   background-color: rgb(42 42 42 / var(--tw-bg-opacity));

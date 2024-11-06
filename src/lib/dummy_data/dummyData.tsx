@@ -58,7 +58,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "Omnico Team",
-    service: "ChawkBazar Laravel Flutter Mobile App",
+    service: "ChawkBazar Laravel Flutter Mobile App Platform Application",
     price: 500.0,
     servicePoster: require("../../Assets/poster2.png"),
     businessLogo: require("../../Assets/dev_logo2.png"),
@@ -68,7 +68,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "BentaSoft",
-    service: "MagazzinePro Lyfestyle Blog Template",
+    service: "MagazzinePro Lyfestyle Blog Template Platform",
     price: 600.0,
     servicePoster: require("../../Assets/poster3.png"),
     businessLogo: require("../../Assets/dev_logo3.png"),
@@ -88,7 +88,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "Bitronic",
-    service: "Borobazar React Next Grocery Template",
+    service: "Borobazar React Next Grocery Template Platform",
     price: 700.0,
     servicePoster: require("../../Assets/poster1.png"),
     businessLogo: require("../../Assets/dev_logo1.png"),
@@ -97,7 +97,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "Omnico Team",
-    service: "ChawkBazar Laravel Flutter Mobile App",
+    service: "ChawkBazar Laravel Flutter Mobile App Platform",
     price: 500.0,
     servicePoster: require("../../Assets/poster2.png"),
     businessLogo: require("../../Assets/dev_logo2.png"),
@@ -117,7 +117,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "Bitronic",
-    service: "Borobazar React Next Grocery Template",
+    service: "Borobazar React Next Grocery Template Platform",
     price: 700.0,
     servicePoster: require("../../Assets/poster1.png"),
     businessLogo: require("../../Assets/dev_logo1.png"),
@@ -145,7 +145,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "BentaSoft",
-    service: "MagazzinePro Lyfestyle Blog Template",
+    service: "MagazzinePro Lyfestyle Blog Template Platform",
     price: 600.0,
     servicePoster: require("../../Assets/poster3.png"),
     businessLogo: require("../../Assets/dev_logo3.png"),
@@ -155,7 +155,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "Bitronic",
-    service: "Borobazar React Next Grocery Template",
+    service: "Borobazar React Next Grocery Template Platform",
     price: 700.0,
     servicePoster: require("../../Assets/poster1.png"),
     businessLogo: require("../../Assets/dev_logo1.png"),
@@ -164,7 +164,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "Bitronic",
-    service: "Borobazar React Next Grocery Template",
+    service: "Borobazar React Next Grocery Template Platform",
     price: 700.0,
     servicePoster: require("../../Assets/poster1.png"),
     businessLogo: require("../../Assets/dev_logo1.png"),
@@ -173,7 +173,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "Omnico Team",
-    service: "ChawkBazar Laravel Flutter Mobile App",
+    service: "ChawkBazar Laravel Flutter Mobile App Platform",
     price: 500.0,
     servicePoster: require("../../Assets/poster2.png"),
     businessLogo: require("../../Assets/dev_logo2.png"),
@@ -183,7 +183,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "BentaSoft",
-    service: "MagazzinePro Lyfestyle Blog Template",
+    service: "MagazzinePro Lyfestyle Blog Template Platform",
     price: 600.0,
     servicePoster: require("../../Assets/poster3.png"),
     businessLogo: require("../../Assets/dev_logo3.png"),
@@ -193,7 +193,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "Bitronic",
-    service: "Borobazar React Next Grocery Template",
+    service: "Borobazar React Next Grocery Template Platform",
     price: 700.0,
     servicePoster: require("../../Assets/poster1.png"),
     businessLogo: require("../../Assets/dev_logo1.png"),
@@ -202,7 +202,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "Bitronic",
-    service: "Borobazar React Next Grocery Template",
+    service: "Borobazar React Next Grocery Template Platform",
     price: 700.0,
     servicePoster: require("../../Assets/poster1.png"),
     businessLogo: require("../../Assets/dev_logo1.png"),
@@ -211,7 +211,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "Omnico Team",
-    service: "ChawkBazar Laravel Flutter Mobile App",
+    service: "ChawkBazar Laravel Flutter Mobile App Platform",
     price: 500.0,
     servicePoster: require("../../Assets/poster2.png"),
     businessLogo: require("../../Assets/dev_logo2.png"),
@@ -221,7 +221,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "BentaSoft",
-    service: "MagazzinePro Lyfestyle Blog Template",
+    service: "MagazzinePro Lyfestyle Blog Template Platform",
     price: 600.0,
     servicePoster: require("../../Assets/poster3.png"),
     businessLogo: require("../../Assets/dev_logo3.png"),
@@ -230,7 +230,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "Bitronic",
-    service: "Borobazar React Next Grocery Template",
+    service: "Borobazar React Next Grocery Template Platform",
     price: 700.0,
     servicePoster: require("../../Assets/poster1.png"),
     businessLogo: require("../../Assets/dev_logo1.png"),
@@ -239,7 +239,7 @@ export const freelanceServices: {
   {
     id: generateServiceId(),
     businessName: "Bitronic",
-    service: "Borobazar React Next Grocery Template",
+    service: "Borobazar React Next Grocery Template Platform",
     price: 700.0,
     servicePoster: require("../../Assets/poster1.png"),
     businessLogo: require("../../Assets/dev_logo1.png"),

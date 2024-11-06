@@ -38,7 +38,7 @@
 .price_col {
   color: #24b47e;
   /* background-color: #323232; */
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
@@ -48,9 +48,11 @@
 }
 
 .service_description {
-  color: #c5c4c4;
+  /* color: #c5c4c4; */
   font-size: 0.9rem;
   margin-top: 20px;
+  --tw-text-opacity: 1;
+  color: rgb(210 210 210 / var(--tw-text-opacity));
 }
 
 .cart_icon {
@@ -163,4 +165,9 @@
 .viewmore_btn a:hover {
   color: #ccf7e7;
   transition: ease-in-out 0.3s;
+}
+
+.border_color {
+  --tw-border-opacity: 1;
+  border-color: rgb(62 62 62 / var(--tw-border-opacity));
 }

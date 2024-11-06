@@ -1,0 +1,43 @@
+.modal_overlay {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+}
+
+.auth_form_container {
+  --tw-bg-opacity: 1;
+  background-color: rgb(42 42 42 / var(--tw-bg-opacity));
+  border-radius: 20px;
+}
+
+.form_input {
+  background-color: transparent !important;
+  border: 1px solid #a8a6a6;
+  border-radius: 10px;
+  height: 60px;
+  padding-left: 10px;
+}
+
+.form_label {
+  color: #a8a6a6;
+  font-size: 13px;
+}
+
+.form_input:focus {
+  border-color: #24b47e; /* Change border color */
+  outline: none;
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.form_input::placeholder {
+  color: #fefefe;
+}
+
+.form_btn {
+  background-color: #24b47e;
+}
+
+.form_btn:hover {
+  background-color: #16a36f;
+  transition: ease-in-out 0.5s;
+}

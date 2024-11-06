@@ -86,7 +86,7 @@ const SearchServicesModal: React.FC = () => {
             )}
             <div
               style={{ marginTop: "170px" }}
-              className="grid px-3  grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:gap-6 3xl:gap-7 xl:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-6 4xl:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]"
+              className="grid px-3  grid-cols-1  sm:grid-cols-2 md:grid-cols-3 gap-6 3xl:gap-7 xl:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-6 4xl:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]"
             >
               {!isLoading &&
                 freelanceServices.length > 0 &&

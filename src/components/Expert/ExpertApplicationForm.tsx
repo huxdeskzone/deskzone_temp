@@ -170,7 +170,7 @@ const ExpertApplicationForm: React.FC = () => {
         <div
           className={`${styles.service_form} flex justify-center h-4/5 overflow-y-auto`}
         >
-          <div className="lg:w-3/4 px-5 lg:pr-5">
+          <div className="w-3/4 px-5 lg:pr-5">
             <h3 className="text-cyan-50 text-sm sm:text-2xl md:text-3xl">
               Business Details
             </h3>
@@ -204,7 +204,7 @@ const ExpertApplicationForm: React.FC = () => {
                   onChange={onChangeBusinessName}
                   // value={serviceTitle.title}
                 />
-                <span className="absolute left-3/4 -mt-6 -ml-12 text-fuchsia-200 text-sm">
+                <span className="absolute left-3/4  -mt-6 -ml-14 text-fuchsia-200 text-sm">
                   {expertApplicationState?.businessName?.length}/30
                 </span>
               </div>
