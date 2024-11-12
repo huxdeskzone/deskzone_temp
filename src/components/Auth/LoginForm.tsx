@@ -97,7 +97,7 @@ const LoginForm: React.FC = () => {
           formTitle="Welcome Back, Login Here"
         />
 
-        <div className="flex gap-4 justify-center mt-4 text-sm font-medium text-gray-500 dark:text-gray-300">
+        <div className="flex gap-4 justify-center mt-4 text-sm font-medium text-gray-300">
           Don't have an account?
           <Link to="/auth/sign-up" className={styles.account}>
             Create account
@@ -138,7 +138,7 @@ const LoginForm: React.FC = () => {
                 type="email"
                 name="email"
                 id="email"
-                className={`${styles.form_input} text-sm block w-full p-2.5  dark:text-white`}
+                className={`${styles.form_input} text-sm block w-full p-2.5  text-white`}
                 placeholder="name@company.com"
                 onChange={(event) => setEmail(event.target.value)}
                 value={email}
@@ -157,7 +157,7 @@ const LoginForm: React.FC = () => {
                   name="password"
                   id="password"
                   placeholder="••••••••"
-                  className={`${styles.form_input} text-sm block w-full p-2.5  dark:text-white`}
+                  className={`${styles.form_input} text-sm block w-full p-2.5  text-white`}
                   onChange={(event) => setPassword(event.target.value)}
                   value={password}
                 />
@@ -183,7 +183,7 @@ const LoginForm: React.FC = () => {
                 </div>
                 <label
                   htmlFor="remember"
-                  className={`${styles.form_label} ms-2 text-sm font-medium text-gray-900 dark:text-gray-300`}
+                  className={`${styles.form_label} ms-2 text-sm font-medium text-gray-300`}
                 >
                   Remember me
                 </label>

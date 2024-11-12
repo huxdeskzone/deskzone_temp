@@ -122,7 +122,7 @@ const ExpertApplicationForm: React.FC = () => {
       expertApplicationState?.businessName || ""
     );
 
-    await createExpert({ expertData: formData });
+    await createExpert(formData);
   };
 
   useEffect(() => {
@@ -204,9 +204,12 @@ const ExpertApplicationForm: React.FC = () => {
                   onChange={onChangeBusinessName}
                   // value={serviceTitle.title}
                 />
-                <span className="absolute left-3/4  -mt-6 -ml-14 text-fuchsia-200 text-sm">
-                  {expertApplicationState?.businessName?.length}/30
-                </span>
+
+                <div className="flex justify-end -mt-5 mr-2">
+                  <span className="text-fuchsia-200 text-sm">
+                    {expertApplicationState?.businessName?.length}/30
+                  </span>
+                </div>
               </div>
 
               <div className="mb-5">
@@ -229,7 +232,7 @@ const ExpertApplicationForm: React.FC = () => {
                 </div>
               </div>
 
-              <div className="my-5">
+              <div className="my-10">
                 <FormButton
                   isLoading={isLoading}
                   formIsValid={formIsValid}

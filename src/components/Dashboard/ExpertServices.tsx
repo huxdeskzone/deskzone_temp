@@ -1,38 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ExpertServiceCard from "./ExpertServiceCard";
 import ServicesLoader from "../commons/ServicesLoader";
-import { getAllServices } from "../../lib/apis/ServicesApis";
 import { useGetAllExpertServicesMutation } from "../../lib/apis/serviceApis";
-import { IServicesProps } from "../../interfaces/propsInterfaces";
+import ErrorPage from "../commons/ErrorPage";
 
 const ExpertServices: React.FC = () => {
-  const [services, setServices] = useState<IServicesProps[]>([]);
-
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
 
-  const [getAllExpertServices, { isLoading, error, data }] =
+  const [getAllExpertServices, { isLoading, error, data, isError }] =
     useGetAllExpertServicesMutation();
 
   useEffect(() => {
-    const result = getAllServices();
-    setServices(result);
-
     getAllExpertServices(null);
   }, [category]);
 
   return (
     <>
+      {isError && <ErrorPage />}
       {isLoading ? (
         <ServicesLoader />
       ) : (
         <section className="w-full my-5 px-4 pb-9 pt-5 md:px-6 md:pb-10 md:pt-6 lg:px-7 lg:pb-12 3xl:px-8 ">
-          <div className="-z-10 grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 gap-6 3xl:gap-7 xl:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-6 4xl:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
-            {services &&
-              services.length > 0 &&
-              services.map((service: any) => {
-                return <ExpertServiceCard {...service} key={service.id} />;
+          <div className="-z-10 grid grid-cols-1 lsm:grid-cols-2  md:grid-cols-2 smd:grid-cols-3 gap-5 xl:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-6 4xl:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
+            {data &&
+              data?.data?.length > 0 &&
+              data?.data?.map((service: any) => {
+                return (
+                  <ExpertServiceCard
+                    businessLogo={service.expert_profile?.business_logo}
+                    serviceVideo={service.explainer_video}
+                    businessName={service.expert_profile?.business_name}
+                    price={service.lowest_acceptable_amount}
+                    servicePoster={service.thumbnail}
+                    service={service.title}
+                    key={service.id}
+                    id={service.id}
+                    category="Software Development"
+                  />
+                );
               })}
           </div>
         </section>

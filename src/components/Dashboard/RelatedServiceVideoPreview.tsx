@@ -5,18 +5,12 @@ import { IconContext } from "react-icons";
 import { BiPlay, BiPause } from "react-icons/bi";
 import { RiVolumeMuteLine } from "react-icons/ri";
 import { AiOutlineMuted } from "react-icons/ai";
-import { FaStar, FaHeart } from "react-icons/fa";
-import { CiHeart } from "react-icons/ci";
-import Spinner from "../commons/Spinner";
-import {
-  useAddItemToWishListMutation,
-  useDeleteItemFromWishlistMutation,
-  useGetLoggedinUserWishlistMutation,
-} from "../../lib/apis/wishlistApi";
+import { FaStar } from "react-icons/fa";
+
 import { ModalContext } from "../../context/modal-context";
 import styles from "./VideoPreview.module.css";
 
-const VideoPreview: React.FC<{
+const RelatedServiceVideoPreview: React.FC<{
   serviceName?: string;
   serviceVideo?: string;
   servicePoster?: string;
@@ -30,51 +24,13 @@ const VideoPreview: React.FC<{
   const videoRef = useRef<HTMLVideoElement>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const [showVoiceIcon, setShowVoiceIcon] = useState(false);
-  const [itemIsOnWishlist2, setItemIsOnWishlist] = useState(false);
-  const [wishlistId, setWishlistId] = useState<string | null>(null);
 
   const navigate = useNavigate();
-
-  const [
-    addToWishList,
-    { isSuccess: addWishlistSuccess, isLoading: addWishlistLoading },
-  ] = useAddItemToWishListMutation();
-
-  const [deleteItemFromWishlist, { error, isLoading, isSuccess }] =
-    useDeleteItemFromWishlistMutation();
-
-  const [getLoggedinUserWishlist] = useGetLoggedinUserWishlistMutation();
 
   const modalCtx = useContext(ModalContext);
 
   const { user } = useSelector((state: any) => state.userState);
   const { wishlist } = useSelector((state: any) => state.userWishlistState);
-
-  useEffect(() => {
-    if (user) {
-      getLoggedinUserWishlist(null);
-    }
-  }, [isSuccess, addWishlistSuccess]);
-
-  useEffect(() => {
-    if (wishlist && wishlist.length > 0) {
-      const serviceWithIdExistOnWishlist = wishlist.find(
-        (item: any) => item.expertService.id === id
-      );
-
-      if (serviceWithIdExistOnWishlist) {
-        setItemIsOnWishlist(true);
-      } else {
-        setItemIsOnWishlist(false);
-      }
-
-      if (serviceWithIdExistOnWishlist) {
-        setWishlistId(serviceWithIdExistOnWishlist.id);
-      }
-    } else {
-      setItemIsOnWishlist(false);
-    }
-  }, [isSuccess, wishlist]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -132,24 +88,8 @@ const VideoPreview: React.FC<{
     }
   };
 
-  const naviagateUser = () => {
-    modalCtx.toggleModal("auth");
-    navigate("/auth/login");
-  };
-
   const navigateToServiceDetailsPage = () => {
     navigate(`/products/${id}`);
-  };
-
-  const onAddItemToWishList = async () => {
-    await addToWishList({
-      name: wishlist[0].wishListCategory.name,
-      serviceId: id,
-    });
-  };
-
-  const onDeleteItemFromWishlist = async (wishlistId: string) => {
-    await deleteItemFromWishlist(wishlistId);
   };
 
   return (
@@ -159,7 +99,7 @@ const VideoPreview: React.FC<{
       onMouseOver={() => setShowVoiceIcon(true)}
       onMouseLeave={() => setShowVoiceIcon(false)}
     >
-      <div className={styles.controls2}>
+      <div className={styles.controls3}>
         <div className="absolute">
           {showVoiceIcon && isMuted && (
             <button
@@ -184,49 +124,6 @@ const VideoPreview: React.FC<{
             </button>
           )}
         </div>
-
-        {!itemIsOnWishlist2 ? (
-          <>
-            {!wishlist && (
-              <button
-                className={`${styles.controlButton3} relative hover:transform hover:scale-110`}
-                onClick={() =>
-                  user && onShowWishList ? onShowWishList() : naviagateUser()
-                }
-              >
-                <IconContext.Provider value={{ color: "white", size: "1.5em" }}>
-                  <CiHeart />
-                </IconContext.Provider>
-              </button>
-            )}
-
-            {wishlist && wishlist.length > 0 && (
-              <button
-                className={`${styles.controlButton3} relative hover:transform hover:scale-110`}
-                onClick={() => onAddItemToWishList()}
-              >
-                <IconContext.Provider value={{ color: "white", size: "1.5em" }}>
-                  {addWishlistLoading ? <Spinner /> : <CiHeart />}
-                </IconContext.Provider>
-              </button>
-            )}
-          </>
-        ) : (
-          <button
-            className={`${styles.controlButton4} relative hover:transform hover:scale-110`}
-            onClick={() =>
-              user && wishlistId && onDeleteItemFromWishlist(wishlistId)
-            }
-          >
-            {isLoading ? (
-              <Spinner />
-            ) : (
-              <IconContext.Provider value={{ color: "#e00241", size: "1.5em" }}>
-                <FaHeart />
-              </IconContext.Provider>
-            )}
-          </button>
-        )}
       </div>
 
       <img
@@ -276,4 +173,4 @@ const VideoPreview: React.FC<{
   );
 };
 
-export default VideoPreview;
+export default RelatedServiceVideoPreview;

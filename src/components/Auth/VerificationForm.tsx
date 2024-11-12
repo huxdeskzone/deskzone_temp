@@ -142,31 +142,33 @@ const VerificationForm: React.FC = () => {
               >
                 Verification Code
               </label>
-              <div className="flex items-center">
+              <div className="mb-10">
                 <input
                   type="text"
                   name="verification-code"
                   id="text-input"
-                  className={`${styles.form_input} text-sm block w-full p-2.5  dark:text-white`}
+                  className={`${styles.form_input} text-sm block w-full p-2.5  text-white`}
                   placeholder="enter verification code"
                   value={verificationCode}
                   onChange={(event) => setVerificationCode(event.target.value)}
                 />
 
-                <Link
-                  to="#"
-                  className={` ${styles.resend_link}  -ml-20`}
-                  onClick={() =>
-                    resendVerificationToken({
-                      email: messageCtx?.successMessage?.message
-                        .split(" ")[6]
-                        .slice(0, -1),
-                      action_type: "registration",
-                    })
-                  }
-                >
-                  Resend Code
-                </Link>
+                <div className="flex justify-end w-24 pr-2 ml-auto -mt-8">
+                  <Link
+                    to="#"
+                    className={`${styles.resend_link}`}
+                    onClick={() =>
+                      resendVerificationToken({
+                        email: messageCtx?.successMessage?.message
+                          .split(" ")[6]
+                          .slice(0, -1),
+                        action_type: "registration",
+                      })
+                    }
+                  >
+                    Resend Code
+                  </Link>
+                </div>
               </div>
             </div>
 

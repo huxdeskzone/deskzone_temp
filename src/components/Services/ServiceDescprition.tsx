@@ -1,14 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
+import { EditorState, convertToRaw } from "draft-js";
 import UseOptions from "../../hooks/useOptions";
 import draftToHtml from "draftjs-to-html";
-import htmlToDraft from "html-to-draftjs";
 import "./Description.css";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const ServiceDescription: React.FC<{
-  onChangeDescription: (description: string) => void;
+  onChangeDescription: (description: string, plainDescription: string) => void;
 }> = ({ onChangeDescription }) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -23,13 +22,14 @@ const ServiceDescription: React.FC<{
     const getPlainText = () => {
       const contentState = editorState.getCurrentContent();
       const plainText = contentState.getPlainText(); // Get pure text
-      setDescLen(plainText.length);
+      setDescLen(plainText.trim().length);
+
+      if (contentRef.current && contentRef.current.value) {
+        onChangeDescription(contentRef?.current?.value, plainText.trim());
+      }
     };
 
     getPlainText();
-    if (contentRef.current && contentRef.current.value) {
-      onChangeDescription(contentRef?.current?.value);
-    }
   }, [editorState]);
 
   return (
@@ -50,9 +50,10 @@ const ServiceDescription: React.FC<{
         mention={mention}
         hashtag={hashtag}
       />
-      <span className="absolute left-3/4 -mt-6 -ml-16 text-fuchsia-200 text-sm">
-        {descLen}/600
-      </span>
+
+      <div className="flex justify-end -mt-5 mr-2">
+        <span className=" text-fuchsia-200 text-sm">{descLen}/600</span>
+      </div>
     </div>
   );
 };

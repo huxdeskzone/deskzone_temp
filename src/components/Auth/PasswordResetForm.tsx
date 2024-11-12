@@ -108,7 +108,7 @@ const PasswordResetForm: React.FC = () => {
                 id="text-input"
                 className={`${
                   styles.form_input
-                } text-sm block w-full p-2.5  dark:text-white ${
+                } text-sm block w-full p-2.5  text-white ${
                   formError.field === "email" && styles.error_identifier
                 }`}
                 placeholder="johndoe@gmail.com"

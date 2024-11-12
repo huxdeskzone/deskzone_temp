@@ -17,6 +17,7 @@ export interface IServicesProps {
   servicePoster?: string;
   businessLogo?: string;
   serviceVideo?: string;
+  category?: string;
 }
 
 export interface IModalOverlayProps {

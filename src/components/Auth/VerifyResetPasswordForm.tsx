@@ -64,7 +64,7 @@ const VerificationResetPasswordForm: React.FC = () => {
                 type="text"
                 name="password-reset-code"
                 id="text-input"
-                className={`${styles.form_input} text-sm block w-full p-2.5  dark:text-white`}
+                className={`${styles.form_input} text-sm block w-full p-2.5  text-white`}
                 placeholder="enter verification code"
                 value={passwordResetCode}
                 onChange={(event) => setPasswordResetCode(event.target.value)}

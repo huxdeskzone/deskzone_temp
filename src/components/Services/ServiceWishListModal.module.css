@@ -41,3 +41,12 @@
   background-color: #16a36f;
   transition: ease-in-out 0.5s;
 }
+
+.form_btn2:hover {
+  background-color: #383838;
+  transition: ease-in-out 0.5s;
+}
+
+.error_identifier {
+  border: 1px solid rgb(153 27 27 / var(--tw-text-opacity)) !important;
+}

@@ -6,6 +6,7 @@ import {
 } from "../../lib/apis/serviceApis";
 import { useGetLoggedInExpertsMutation } from "../../lib/apis/expertApis";
 import { getToken } from "../../helpers/firebase";
+import useFormValidation from "../../hooks/useFormValidation";
 import ServiceVideoPreview from "./ServiceVideoPreveiw";
 import ServiceDescription from "./ServiceDescprition";
 import ImageCropModal from "./ImageCropModal";
@@ -29,7 +30,8 @@ const CreateService: React.FC = () => {
   const [prevVideo, setPrevVideo] = useState("");
   const [category, setCategory] = useState<string>("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState<string>("$");
+  const [plainDesc, setPlainDesc] = useState("");
+  const [price, setPrice] = useState<string>("");
   const [explaner_video, setExplanerVideo] = useState<File | string>("");
   const [bannerUploadIsLoading, setBannerUploadIsLoading] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -43,6 +45,13 @@ const CreateService: React.FC = () => {
   // const modalCtx = useContext(ModalContext);
 
   const [uploadPercentage, setUploadPercentagage] = useState(0);
+
+  // validate registration form hook
+  const [formIsValid, formError, validateFormInputs] = useFormValidation() as [
+    boolean,
+    { field: string; error: string },
+    (type: string, formProps: any) => void
+  ];
 
   const [inlineResult, setInlineResult] = useState<string>("");
 
@@ -183,7 +192,11 @@ const CreateService: React.FC = () => {
   };
 
   // get service description function
-  const onChangeDescription = (description: string) => {
+  const onChangeDescription = (
+    description: string,
+    plainDescription: string
+  ) => {
+    setPlainDesc(plainDescription);
     return setDescription(description);
   };
 
@@ -210,22 +223,41 @@ const CreateService: React.FC = () => {
     if (token) {
       const formData = new FormData();
 
+      // const croppedThumbnail = new File([inlineResult], "thumbnail");
+
       formData.append("title", serviceTitle.title);
       formData.append("description", description);
-      formData.append("lowest_acceptable_amount", price.slice(1));
+      formData.append("lowest_acceptable_amount", price);
       formData.append("thumbnail", banner);
       formData.append("explainer_video", explaner_video);
       formData.append("currency", "1");
-      formData.append("years_of_experience", "4");
+      formData.append("years_of_experience", "1");
       formData.append("service_category", category);
 
-      createExpertService({
-        accessToken: token,
-        serviceData: formData,
-      });
+      if (!formIsValid) return;
+
+      await createExpertService(formData);
     }
   };
-  console.log(error);
+
+  useEffect(() => {
+    if (typeof validateFormInputs === "function") {
+      const timer = setTimeout(() => {
+        validateFormInputs("create-service", {
+          title: serviceTitle.title,
+          price,
+          description: plainDesc,
+          category,
+          banner,
+          explaner_video,
+        });
+      }, 1000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [serviceTitle.title, price, category, banner, explaner_video, plainDesc]);
+
   return (
     <>
       {modalIsOpen && (
@@ -258,7 +290,9 @@ const CreateService: React.FC = () => {
             </h1>
           </div>
         </div>
-        <div className={`${styles.service_form} flex justify-center`}>
+        <div
+          className={`${styles.service_form2} w-11/12 md:w-3/4 flex justify-center`}
+        >
           <div className="w-3/4 px-5 lg:pr-5">
             <h3 className="text-cyan-50 text-sm sm:text-2xl md:text-3xl">
               Service Details
@@ -289,15 +323,18 @@ const CreateService: React.FC = () => {
                   name="title"
                   id="email"
                   className={`${styles.form_input} ${
-                    serviceTitle.title.length > 50 && styles.error_border
+                    serviceTitle.title.trim().length > 50 && styles.error_border
                   } text-sm block w-full  dark:text-white`}
                   placeholder="e-commerce website"
                   onChange={changeServiceTitleHandler}
                   value={serviceTitle.title}
                 />
-                <span className="absolute left-3/4  -mt-6 -ml-12 text-fuchsia-200 text-sm">
-                  {serviceTitle?.title?.length}/{serviceTitle.totalCharacter}
-                </span>
+                <div className="flex justify-end -mt-5 mr-2">
+                  <span className=" text-fuchsia-200 text-sm">
+                    {serviceTitle?.title?.trim().length}/
+                    {serviceTitle.totalCharacter}
+                  </span>
+                </div>
               </div>
               <div className="md:flex gap-5 mb-5 max-md:gap-9 sm:justify-between items-center">
                 <div className="w-full">
@@ -325,13 +362,15 @@ const CreateService: React.FC = () => {
                     className={`${styles.form_select} text-sm block w-full p-2.5  dark:text-white`}
                     onChange={(event) => setCategory(event.target.value)}
                   >
+                    <option className={styles.cat_options}>
+                      Select Category
+                    </option>
                     {data &&
                       data?.data.length > 0 &&
                       data?.data?.map((category: any) => {
                         return (
                           <option
                             key={category?.id}
-                            selected
                             value={category.id}
                             className={styles.cat_options}
                           >
@@ -342,7 +381,7 @@ const CreateService: React.FC = () => {
                   </select>
                 </div>
 
-                <div className="w-full">
+                <div className="w-full md:-mt-7">
                   <label
                     htmlFor="price"
                     className={`${styles.form_label} block mb-2  font-medium`}
@@ -351,7 +390,7 @@ const CreateService: React.FC = () => {
                   </label>
 
                   <span
-                    className={`${styles.required_field} flex gap-2 items-center  absolute ml-3 mt-1 text-sm `}
+                    className={`${styles.required_field}  flex gap-2 items-center  absolute ml-3 mt-1 text-sm `}
                   >
                     Price (required){" "}
                     <a
@@ -362,18 +401,26 @@ const CreateService: React.FC = () => {
                       <i className="fa-regular w-4 h-4 fa-circle-question"></i>
                     </a>
                   </span>
+
                   <input
                     type="text"
                     name="price"
                     id="email"
-                    className={`${styles.form_input} text-sm block w-full p-2.5  dark:text-white`}
-                    placeholder="400"
+                    className={`${styles.form_input2}  text-sm block w-full py-2.5 pl-7 text-white`}
                     onChange={(event) => setPrice(event.target.value)}
                     value={price}
                   />
+
+                  <div className="-mt-14 w-10">
+                    <input
+                      value="$"
+                      className={`${styles.form_input3} w-7 pl-3`}
+                      disabled
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="mb-5">
+              <div className="mb-5 mt-5">
                 <label
                   htmlFor="service-title"
                   className={`${styles.form_label} block mb-2  font-medium`}
@@ -542,7 +589,7 @@ const CreateService: React.FC = () => {
               <div className="my-5">
                 <FormButton
                   isLoading={isLoading}
-                  formIsValid={true}
+                  formIsValid={formIsValid}
                   textContent="Create Service"
                 />
               </div>

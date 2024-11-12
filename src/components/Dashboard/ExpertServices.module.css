@@ -1,6 +1,7 @@
 .services_card {
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  height: 260px;
 }
 
 .business_name {
@@ -35,6 +36,13 @@
   font-size: 0.7rem;
 }
 
+.price_col2 {
+  color: #24b47e;
+  /* background-color: #323232; */
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
 .price_col {
   color: #24b47e;
   /* background-color: #323232; */
@@ -47,10 +55,16 @@
   margin: 0 auto;
 }
 
+.service_description_intro {
+  margin-top: 20px;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
 .service_description {
   /* color: #c5c4c4; */
-  font-size: 0.9rem;
-  margin-top: 20px;
+  margin-bottom: 20px;
   --tw-text-opacity: 1;
   color: rgb(210 210 210 / var(--tw-text-opacity));
 }
@@ -65,11 +79,11 @@
 
 .service_text {
   color: #f3f3f3;
+  font-weight: 700;
 }
 
 .service_button {
   background-color: #24b47e;
-  /* width: 100%; */
   align-items: center;
 }
 
@@ -170,4 +184,76 @@
 .border_color {
   --tw-border-opacity: 1;
   border-color: rgb(62 62 62 / var(--tw-border-opacity));
+}
+
+@media (min-width: 768px) {
+  .price_col {
+    padding-right: 2px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .price_col {
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .price_col {
+    padding-right: 5px;
+  }
+}
+
+@media (min-width: 1293px) {
+  .price_col {
+    padding-right: 0;
+  }
+}
+
+/* @media (min-width: 1300px) {
+  .price_col {
+    padding-right: 0 !important;
+  }
+} */
+
+@media (min-width: 1344px) {
+  .price_col {
+    padding-right: 5px;
+  }
+}
+
+@media (min-width: 1364px) {
+  .price_col {
+    padding-right: 7px;
+  }
+}
+
+@media (min-width: 1385px) {
+  .price_col {
+    padding-right: 5px;
+  }
+}
+
+@media (min-width: 1394px) {
+  .price_col {
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 1417px) {
+  .price_col {
+    padding-right: 5px;
+  }
+}
+
+@media (min-width: 1422px) {
+  .price_col {
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 1536px) {
+  .price_col {
+    padding-right: 2px;
+  }
 }

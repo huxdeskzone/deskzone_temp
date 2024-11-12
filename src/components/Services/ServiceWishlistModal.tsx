@@ -1,4 +1,8 @@
 import ReactDOM from "react-dom";
+import { useState, useEffect } from "react";
+import ButtonLoader from "../commons/ButtonLoader";
+import { useAddItemToWishListMutation } from "../../lib/apis/wishlistApi";
+import useFormValidation from "../../hooks/useFormValidation";
 import styles from "./ServiceWishListModal.module.css";
 
 const ServiceWishListModal: React.FC<{
@@ -6,7 +10,60 @@ const ServiceWishListModal: React.FC<{
   onShowWishList?: () => void;
   serviceId?: string;
   service?: string;
-}> = ({ wishListModalOpen, onShowWishList, service, serviceId }) => {
+  category?: string;
+}> = ({ wishListModalOpen, onShowWishList, service, serviceId, category }) => {
+  const [wishListData, setWishListData] = useState<{
+    name: string;
+    serviceId: string;
+  }>({ name: "", serviceId: "" });
+
+  const [addItemToWishList, { isSuccess, isLoading, error }] =
+    useAddItemToWishListMutation();
+
+  useEffect(() => {
+    if (serviceId && category) {
+      setWishListData({
+        name: `${category} ${Math.floor(Math.random() * 235)}`,
+        serviceId: serviceId,
+      });
+    }
+  }, [serviceId, service]);
+
+  // validate form hook
+  const [formIsValid, formError, validateFormInputs] = useFormValidation() as [
+    boolean,
+    { field: string; error: string },
+    (type: string, formProps: any) => void
+  ];
+
+  useEffect(() => {
+    if (typeof validateFormInputs === "function") {
+      const timer = setTimeout(() => {
+        validateFormInputs("wishlist", wishListData);
+      }, 1000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [wishListData]);
+
+  const onAddItemToWishList = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    await addItemToWishList({
+      serviceId: wishListData.serviceId,
+      name: wishListData.name,
+    });
+  };
+
+  useEffect(() => {
+    if (isSuccess && onShowWishList) {
+      onShowWishList();
+    }
+  }, [isSuccess]);
+
   return ReactDOM.createPortal(
     <div
       id="progress-modal"
@@ -31,6 +88,9 @@ const ServiceWishListModal: React.FC<{
             </svg>
           </div>
 
+          <h1 className="text-sm md:text-xl lg:text-2xl font-medium text-cyan-50">
+            Add to wishlist
+          </h1>
           <div>
             <button
               type="button"
@@ -60,7 +120,7 @@ const ServiceWishListModal: React.FC<{
         </div>
         <div className="relative shadow">
           <div className="px-4 md:px-5">
-            <form>
+            <form onSubmit={onAddItemToWishList}>
               <div>
                 <label
                   htmlFor="email"
@@ -69,24 +129,55 @@ const ServiceWishListModal: React.FC<{
                   Title
                 </label>
                 <input
-                  type="email"
-                  name="email"
+                  type="text"
+                  name="wishlist-title"
                   id="email"
-                  className={`${styles.form_input} text-sm block w-full p-2.5  dark:text-white`}
-                  placeholder="name@company.com"
-                  // onChange={(event) => setEmail(event.target.value)}
-                  value="Web Development"
+                  className={`${styles.form_input} ${
+                    formError?.field === "name" && styles.error_identifier
+                  } text-sm block w-full p-2.5  dark:text-white`}
+                  placeholder="My Wishlist"
+                  onChange={(event) =>
+                    setWishListData({
+                      ...wishListData,
+                      name: event.target.value,
+                    })
+                  }
+                  value={wishListData.name}
                 />
+                <div className="flex justify-end -mt-5 mr-2">
+                  <span className="text-fuchsia-200 text-sm">
+                    {wishListData.name.trim().length}/50
+                  </span>
+                </div>
               </div>
 
-              <div className="flex items-center mt-6 space-x-4">
+              <div className="flex justify-between items-center mt-6 space-x-4">
                 <button
+                  onClick={() => setWishListData({ ...wishListData, name: "" })}
                   data-modal-hide="progress-modal"
                   type="button"
-                  className={`ml-auto text-white  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center  ${styles.form_btn}`}
+                  className={`text-white  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center  ${styles.form_btn2}`}
                 >
-                  Create
+                  Clear
                 </button>
+                {formIsValid ? (
+                  <button
+                    data-modal-hide="progress-modal"
+                    type="submit"
+                    className={`text-white  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center  ${styles.form_btn}`}
+                  >
+                    {isLoading ? <ButtonLoader /> : "Create"}
+                  </button>
+                ) : (
+                  <button
+                    disabled
+                    data-modal-hide="progress-modal"
+                    type="button"
+                    className={`text-white  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center  ${styles.form_btn}`}
+                  >
+                    Create
+                  </button>
+                )}
               </div>
             </form>
           </div>

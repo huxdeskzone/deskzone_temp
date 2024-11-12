@@ -272,6 +272,140 @@ const useFormValidation = () => {
       }
     }
 
+    if (type === "service-request") {
+      if (!formProps?.description) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "description",
+          error: "Description is required",
+        });
+      }
+
+      if (
+        formProps?.description.trim().length > 500 ||
+        formProps?.description.trim().length <= 50
+      ) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "description",
+          error:
+            "Description should not be less than 10 characters or more than 50 character",
+        });
+      }
+
+      if (!formProps?.project_end_date) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "date",
+          error: "Please provide a end date",
+        });
+      }
+
+      if (!formProps?.amount_offered) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "amount",
+          error: "Amount is required",
+        });
+      }
+    }
+
+    if (type === "wishlist") {
+      if (!formProps?.name) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "name",
+          error: "name is required",
+        });
+      }
+
+      if (
+        formProps?.name.trim().length > 50 ||
+        formProps?.name.trim().length <= 5
+      ) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "name",
+          error:
+            "Wishlist name should not be less than 5 characters or more than 50 character",
+        });
+      }
+    }
+
+    if (type === "create-service") {
+      if (!formProps?.description) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "description",
+          error: "Description is required",
+        });
+      }
+
+      if (
+        formProps?.description.length > 600 ||
+        formProps?.description.length <= 50
+      ) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "description",
+          error:
+            "Description should not be less than 50 characters or more than 600 character",
+        });
+      }
+
+      if (!formProps?.title) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "title",
+          error: "Service Title is required",
+        });
+      }
+
+      if (!formProps?.banner) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "banner",
+          error: "Thumbnail is required",
+        });
+      }
+
+      // if (!formProps?.explainer_video) {
+      //   setFormIsValid(false);
+      //   return setFormError({
+      //     field: "explainer_vidoe",
+      //     error: "Video is requied to create a service",
+      //   });
+      // }
+
+      if (!formProps?.category) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "category",
+          error: "Category is required",
+        });
+      }
+
+      if (!formProps?.price) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "price",
+          error: "price field is required",
+        });
+      }
+
+      if (
+        formProps?.title.trim().length > 50 ||
+        formProps?.title.trim().length <= 5
+      ) {
+        setFormIsValid(false);
+        return setFormError({
+          field: "title",
+          error:
+            "Title should not be less than 5 characters or more than 50 character",
+        });
+      }
+    }
+
     setFormIsValid(true);
     return setFormError({ field: "", error: "" });
   };

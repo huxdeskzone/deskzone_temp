@@ -66,8 +66,6 @@ const UpdatePasswordForm: React.FC = () => {
 
     const email = messageCtx?.successMessage?.message.split(" ")[8];
 
-    console.log(email);
-
     const passwordData = {
       password,
       confirm_password: confirmPassword,
@@ -150,14 +148,14 @@ const UpdatePasswordForm: React.FC = () => {
               >
                 Password Reset Code
               </label>
-              <div className="flex items-center">
+              <div className="">
                 <input
                   type="text"
                   name="password-reset-code"
                   id="text-input"
                   className={`${
                     styles.form_input
-                  } text-sm block w-full p-2.5  dark:text-white ${
+                  } text-sm block w-full p-2.5 text-white ${
                     formError.field === "passwordResetCode" &&
                     styles.error_identifier
                   }`}
@@ -166,18 +164,21 @@ const UpdatePasswordForm: React.FC = () => {
                   onChange={(event) => setPasswordResetCode(event.target.value)}
                 />
 
-                <Link
-                  to="#"
-                  className={` ${styles.resend_link}  -ml-20`}
-                  onClick={() =>
-                    resendVerificationToken({
-                      email: messageCtx?.successMessage?.message.split(" ")[8],
-                      action_type: "reset",
-                    })
-                  }
-                >
-                  Resend Code
-                </Link>
+                <div className="flex justify-end w-24 pr-2 ml-auto -mt-8">
+                  <Link
+                    to="#"
+                    className={` ${styles.resend_link}`}
+                    onClick={() =>
+                      resendVerificationToken({
+                        email:
+                          messageCtx?.successMessage?.message.split(" ")[8],
+                        action_type: "reset",
+                      })
+                    }
+                  >
+                    Resend Code
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -195,7 +196,7 @@ const UpdatePasswordForm: React.FC = () => {
                   name="new-password"
                   className={`${
                     styles.form_input
-                  } text-sm w-full p-2.5  dark:text-white ${
+                  } text-sm w-full p-2.5  text-white ${
                     formError.field === "password" && styles.error_identifier
                   }`}
                   placeholder="••••••••"
@@ -227,7 +228,7 @@ const UpdatePasswordForm: React.FC = () => {
                   id="text-input"
                   className={`${
                     styles.form_input
-                  }  text-sm w-full p-2.5  dark:text-white ${
+                  }  text-sm w-full p-2.5  text-white ${
                     formError.field === "confirmPassword" &&
                     styles.error_identifier
                   }`}

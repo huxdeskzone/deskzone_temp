@@ -1,16 +1,31 @@
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useState, useEffect } from "react";
+import Datepicker from "react-tailwindcss-datepicker";
+import styles from "./RequestServiceModal.module.css";
 
-const ServiceDatePicker: React.FC = () => {
+const ServiceDataPicker: React.FC<{
+  onSelectDate?: (date: any) => void;
+}> = ({ onSelectDate }) => {
+  const [value, setValue] = useState<any>({
+    startDate: null,
+    endDate: null,
+  });
+
+  useEffect(() => {
+    if (onSelectDate) {
+      onSelectDate(value?.endDate);
+    }
+  }, [value]);
+
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={["DatePicker"]}>
-        <DatePicker label="" />
-      </DemoContainer>
-    </LocalizationProvider>
+    <div className={styles.date_picker}>
+      <Datepicker
+        useRange={false}
+        asSingle={true}
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+      />
+    </div>
   );
 };
 
-export default ServiceDatePicker;
+export default ServiceDataPicker;

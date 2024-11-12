@@ -3,7 +3,7 @@ import { IMessageProp } from "../../interfaces/propsInterfaces";
 const Error: React.FC<IMessageProp> = ({ message }) => {
   return (
     <div
-      className="flex w-fit mx-auto justify-center items-center px-8 py-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+      className="flex w-fit mx-auto justify-center items-center px-8 py-4 mb-4 text-sm  border rounded-lg  bg-gray-800 text-red-400 border-red-800"
       role="alert"
     >
       <svg

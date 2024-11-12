@@ -46,6 +46,8 @@ const Profile: React.FC = () => {
     }
   }, [isSuccess, data, editInfo, editSocialLink]);
 
+  console.log(expertData);
+
   return (
     <main
       className={`flex w-full flex-grow flex-col lg:flex-grow-0 lg:bg-light lg:px-12 npm lg:dark:bg-dark-250`}
@@ -181,18 +183,16 @@ const Profile: React.FC = () => {
                     name="profile.bio"
                     className={` ${styles.profile_input} text-cyan-50 min-h-[150px] w-full appearance-none rounded border border-light-500 px-4 py-3 text-13px text-dark ring-[0.5px] ring-light-500 placeholder:text-dark-900 focus:border-brand focus:ring-[0.5px] focus:ring-brand dark:border-dark-600 dark:text-light dark:ring-dark-600 dark:placeholder:text-dark-700 dark:focus:border-brand dark:focus:ring-brand lg:px-5 bg-transparent`}
                     disabled
-                  >
-                    we are a professional web developer
-                  </textarea>
+                    value={expertData?.about_me}
+                  ></textarea>
                 )}
 
                 {editInfo && (
                   <textarea
                     name="profile.bio"
                     className={` ${styles.profile_input} text-cyan-50 min-h-[150px] w-full appearance-none rounded border border-light-500 px-4 py-3 text-13px text-dark ring-[0.5px] ring-light-500 placeholder:text-dark-900 focus:border-brand focus:ring-[0.5px] focus:ring-brand dark:border-dark-600 dark:text-light dark:ring-dark-600 dark:placeholder:text-dark-700 dark:focus:border-brand dark:focus:ring-brand lg:px-5 bg-transparent`}
-                  >
-                    we are a professional web developer
-                  </textarea>
+                    value={expertData.about_me}
+                  ></textarea>
                 )}
               </label>
             </div>

@@ -4,7 +4,9 @@ import { authApi } from "../lib/apis/authApi";
 import { userApi } from "../lib/apis/userApi";
 import { expertApis } from "../lib/apis/expertApis";
 import { serviceApis } from "../lib/apis/serviceApis";
+import { wishlistApis } from "../lib/apis/wishlistApi";
 import userSlice from "../lib/apis/redux/userSlice";
+import userWishlistSlice from "../lib/apis/redux/usersWishlistSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,7 +14,9 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [expertApis.reducerPath]: expertApis.reducer,
     [serviceApis.reducerPath]: serviceApis.reducer,
+    [wishlistApis.reducerPath]: wishlistApis.reducer,
     userState: userSlice,
+    userWishlistState: userWishlistSlice,
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -20,7 +24,8 @@ export const store = configureStore({
       authApi.middleware,
       userApi.middleware,
       expertApis.middleware,
-      serviceApis.middleware
+      serviceApis.middleware,
+      wishlistApis.middleware
     ),
 });
 

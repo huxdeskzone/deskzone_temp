@@ -1,20 +1,47 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useGetAllExpertServicesMutation } from "../../lib/apis/serviceApis";
 import RelatedServiceCard from "./RelatedServiceCard";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-import { relatedServices } from "../../lib/dummy_data/dummyData";
 import styles from "./ExpertServices.module.css";
-import "swiper/css";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import ExpertServiceCard from "./ExpertServiceCard";
 
-const RelatedServices: React.FC<{ serviceName?: string }> = ({
+const responsive = {
+  superLargeDesktop2: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 1536 },
+    items: 6,
+  },
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 1536, min: 1280 },
+    items: 4,
+  },
+  desktop: {
+    breakpoint: { max: 1279, min: 950 },
+    items: 3,
+  },
+  tablet: {
+    breakpoint: { max: 949, min: 600 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 599, min: 0 },
+    items: 1,
+  },
+};
+
+const RelatedServices: React.FC<{ services?: []; serviceName?: string }> = ({
+  services,
   serviceName,
 }) => {
-  // const [services, setServices] = useState<IServicesProps[]>([]);
+  const [getAllExpertServices, { isLoading, error, data }] =
+    useGetAllExpertServicesMutation();
 
-  // useEffect(() => {
-  //   const result = getAllServices();
-  //   setServices(result.filter((service) => service.service === serviceName));
-  // }, []);
+  useEffect(() => {
+    getAllExpertServices(null);
+  }, []);
 
   return (
     <div className="mt-16">
@@ -31,47 +58,34 @@ const RelatedServices: React.FC<{ serviceName?: string }> = ({
           View More
         </Link>
       </div>
-      <div className="flex  focus:outline-none">
-        <div className="w-full ">
-          <Swiper
-            spaceBetween={20}
-            modules={[Navigation, Pagination, Scrollbar, A11y]}
-            loop={true}
-            navigation
-            slidesPerView={1}
-            onSlideChange={() => {}}
-            onSwiper={() => {}}
-            breakpoints={{
-              // when window width is >= 640px
-              640: {
-                slidesPerView: 1,
-              },
-              // when window width is >= 768px
-              768: {
-                slidesPerView: 2,
-              },
-              // when window width is >= 1024px
-              1024: {
-                slidesPerView: 4,
-              },
 
-              1400: {
-                slidesPerView: 6,
-              },
-            }}
-          >
-            {relatedServices.map((service) => {
-              return (
-                <SwiperSlide>
-                  <div style={{ cursor: "pointer", paddingTop: "10px" }}>
-                    <RelatedServiceCard {...service} />
-                  </div>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        </div>
-      </div>
+      <Carousel
+        responsive={responsive}
+        infinite={true}
+        ssr={true}
+        itemClass="carousel-item-spacing"
+        containerClass="carousel-container"
+        removeArrowOnDeviceType={["mobile"]}
+      >
+        {services &&
+          services?.length > 0 &&
+          services?.map((service: any) => {
+            return (
+              <div style={{ cursor: "pointer", paddingTop: "10px" }}>
+                <ExpertServiceCard
+                  businessLogo={service?.expert_profile?.business_logo}
+                  serviceVideo={service?.explainer_video}
+                  businessName={service?.expert_profile?.business_name}
+                  price={service?.lowest_acceptable_amount}
+                  servicePoster={service?.thumbnail}
+                  key={service.id}
+                  id={service?.id}
+                  service={service.title}
+                />
+              </div>
+            );
+          })}
+      </Carousel>
     </div>
   );
 };

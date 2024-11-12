@@ -40,7 +40,7 @@ export const serviceApis = createApi({
       query: (payload) => ({
         url: "/expert/create-service",
         method: "POST",
-        body: payload.serviceData,
+        body: payload,
       }),
     }),
     getAllExpertServices: builder.mutation({
@@ -52,7 +52,7 @@ export const serviceApis = createApi({
 
     getExpertServiceById: builder.mutation({
       query: (payload) => ({
-        url: `/expert/services/d1e0dcd5-91c1-454f-95d1-19a5aafc794`,
+        url: `/expert/services/${payload}`,
         method: "GET",
       }),
     }),

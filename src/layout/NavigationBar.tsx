@@ -6,6 +6,7 @@ import {
   useGetCurrentUserMutation,
   useServerHealthCheckMutation,
 } from "../lib/apis/userApi";
+import { useGetLoggedinUserWishlistMutation } from "../lib/apis/wishlistApi";
 import {
   useLogoutUserMutation,
   useGetNewAccessTokenMutation,
@@ -23,6 +24,8 @@ const NavigationBar: React.FC = () => {
     useGetCurrentUserMutation();
   const [logoutUser, { isSuccess }] = useLogoutUserMutation();
 
+  const [getLoggedinUserWishlist] = useGetLoggedinUserWishlistMutation();
+
   const [getNewAccessToken] = useGetNewAccessTokenMutation();
 
   const [serverHealthCheck, { error: serverError }] =
@@ -39,21 +42,28 @@ const NavigationBar: React.FC = () => {
       const token = await getToken();
 
       getCurrentUser(token);
+      getLoggedinUserWishlist(null);
     };
 
     onGetCurrentUser();
   }, [isSuccess]);
 
-  useEffect(() => {
-    const checkServerHealth = async () => {
-      console.log("checking server health");
-      serverHealthCheck(null);
-    };
+  // useEffect(() => {
+  //   if (user) {
 
-    setInterval(() => {
-      checkServerHealth();
-    }, 5000);
-  }, []);
+  //   }
+  // }, [user]);
+
+  // useEffect(() => {
+  //   const checkServerHealth = async () => {
+  //     console.log("checking server health");
+  //     serverHealthCheck(null);
+  //   };
+
+  //   setInterval(() => {
+  //     checkServerHealth();
+  //   }, 5000);
+  // }, []);
 
   useEffect(() => {
     const apiError =

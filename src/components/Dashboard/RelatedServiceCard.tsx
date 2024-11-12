@@ -1,6 +1,6 @@
-import VideoPreview from "./VideoPreview";
+import RelatedServiceVideoPreview from "./RelatedServiceVideoPreview";
 import { IServicesProps } from "../../interfaces/propsInterfaces";
-import ServiceInfo from "./ServiceInfo";
+import RelatedServiceInfo from "./RelatedServiceInfo";
 import styles from "./RelatedService.module.css";
 
 const RelatedServiceCard: React.FC<IServicesProps> = ({
@@ -17,14 +17,14 @@ const RelatedServiceCard: React.FC<IServicesProps> = ({
       className={`group relative aspect-[3/2] w-full justify-center ${styles.services_card}`}
     >
       {serviceVideo && (
-        <VideoPreview
+        <RelatedServiceVideoPreview
           serviceName={service}
           serviceVideo={serviceVideo}
           servicePoster={servicePoster}
         />
       )}
 
-      <ServiceInfo
+      <RelatedServiceInfo
         businessLogo={businessLogo}
         businessName={businessName}
         price={price}

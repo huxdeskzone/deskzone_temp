@@ -10,7 +10,7 @@ const CloseFormModalBtn: React.FC<ICloseBtnProps> = ({
         <button
           onClick={onToggleModal}
           type="button"
-          className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          className="end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center hover:bg-gray-600 hover:text-white"
           data-modal-hide="authentication-modal"
         >
           <svg
@@ -33,7 +33,7 @@ const CloseFormModalBtn: React.FC<ICloseBtnProps> = ({
       </div>
 
       <div>
-        <h3 className="text-xl text-center font-semibold text-gray-900 dark:text-white">
+        <h3 className="text-xl text-center font-semibold text-white">
           {formTitle}
         </h3>
       </div>

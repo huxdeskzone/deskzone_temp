@@ -1,0 +1,55 @@
+.rating_score {
+  background-color: #24b47e;
+  color: #fefefe;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 23px;
+  border-radius: 50px;
+  width: 90px;
+}
+
+.total_reviews {
+  color: #706e6e;
+}
+
+.rating_container {
+  border-left: 1px solid #706e6e;
+  /* margin-left: -70px;
+  padding-left: 50px; */
+}
+
+.rating_cat {
+  color: #c4c4c4;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+
+  /* justify-content: space-between; */
+  gap: 5px;
+}
+
+.rating_cat2 {
+  color: #c4c4c4;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+
+  /* justify-content: space-between; */
+  gap: 6px;
+}
+
+.rating_icon {
+  color: #c4c4c4;
+  font-size: 0.9rem;
+}
+
+.progress_bg {
+  background-color: #706e6e;
+}
+
+.progress {
+  background-color: #24b47e;
+}

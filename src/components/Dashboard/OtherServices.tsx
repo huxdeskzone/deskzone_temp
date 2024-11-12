@@ -19,7 +19,7 @@ const OtherServices: React.FC<{
   return (
     <div className="my-6">
       <h1 className="mb-3 text-cyan-50">
-        Other services by{" "}
+        More by{" "}
         <a href="">
           <span className="text-cyan-300 hover:text-cyan-50">
             {businessName}

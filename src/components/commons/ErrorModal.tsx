@@ -38,7 +38,7 @@ const ErrorModal: React.FC<{
             <span className="sr-only">Close modal</span>
           </button> */}
           <div
-            className={`${styles.error_modal_icon} w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 p-2 flex items-center justify-center mx-auto mb-3.5`}
+            className={`${styles.error_modal_icon} w-12 h-12 rounded-full  p-2 flex items-center justify-center mx-auto mb-3.5`}
           >
             {/* <svg
               aria-hidden="true"

@@ -26,14 +26,12 @@ const OtherServicePlayerPreview: React.FC<{
       onMouseOver={playVideo}
       onMouseLeave={stopVideo}
     >
-      <div className={styles.playerContainer}>
-        <video
-          className={`${styles.videoPlayer1}`}
-          ref={videoRef}
-          src={serviceVideo}
-          muted
-        />
-      </div>
+      <video
+        className={`${styles.videoPlayer1}`}
+        ref={videoRef}
+        src={serviceVideo}
+        muted
+      />
     </div>
   );
 };

@@ -68,8 +68,9 @@ const VideoPlayer: React.FC<{ serviceVideo: string }> = ({ serviceVideo }) => {
   };
 
   return (
-    <div className={styles.container}>
-      {/* <div className={styles.playerContainer}> */}
+    <div
+      className={`${styles.container} sm:h-[290px] md:h-[350px] lg:h-[450px]  2xl:h-[550px]`}
+    >
       <video
         className={`${styles.videoPlayer} object-cover w-full h-full`}
         ref={videoRef}
@@ -137,7 +138,6 @@ const VideoPlayer: React.FC<{ serviceVideo: string }> = ({ serviceVideo }) => {
         </div>
       )}
     </div>
-    // </div>
   );
 };
 

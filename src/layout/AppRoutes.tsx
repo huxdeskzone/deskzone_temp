@@ -15,9 +15,12 @@ import TopExpertsAbout from "../components/TopExperts/TopExpertsAbout";
 import TopExpertsHelp from "../components/TopExperts/TopExpertsHelp";
 import TopExpertTerms from "../components/TopExperts/TopExpertsTerms";
 import ExpertRoutes from "./ExpertRoutes";
+
 import Profile from "../components/Profile/Expert/Profile";
 import Products from "../components/Profile/Expert/Products";
 import ClientGeneralProfile from "../components/Profile/Client/Profile";
+import ServicesLoader from "../components/commons/ServicesLoader";
+import ServiceDetailsLoader from "../components/commons/ServiceDetailsLoader";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const TopExpertsPage = lazy(() => import("../pages/TopExpertsPage"));
@@ -46,63 +49,39 @@ const AppRoutes: React.FC = () => {
       <Route
         path="/"
         element={
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<ServicesLoader />}>
             <HomePage />
           </Suspense>
         }
       >
         <Route
           path="auth/login"
-          element={
-            <Suspense fallback={<></>}>
-              <ModalOverlay children={<LoginForm />} />
-            </Suspense>
-          }
+          element={<ModalOverlay children={<LoginForm />} />}
         />
 
         <Route
           path="auth/sign-up"
-          element={
-            <Suspense fallback={<></>}>
-              <ModalOverlay children={<SignupForm />} />
-            </Suspense>
-          }
+          element={<ModalOverlay children={<SignupForm />} />}
         />
 
         <Route
           path="auth/verify"
-          element={
-            <Suspense fallback={<></>}>
-              <ModalOverlay children={<VerificationForm />} />
-            </Suspense>
-          }
+          element={<ModalOverlay children={<VerificationForm />} />}
         />
 
         <Route
           path="auth/password/reset"
-          element={
-            <Suspense fallback={<></>}>
-              <ModalOverlay children={<PasswordResetForm />} />
-            </Suspense>
-          }
+          element={<ModalOverlay children={<PasswordResetForm />} />}
         />
 
         <Route
           path="auth/password/reset/verify"
-          element={
-            <Suspense fallback={<></>}>
-              <ModalOverlay children={<VerifyResetPasswordForm />} />
-            </Suspense>
-          }
+          element={<ModalOverlay children={<VerifyResetPasswordForm />} />}
         />
 
         <Route
           path="auth/password/update"
-          element={
-            <Suspense fallback={<></>}>
-              <ModalOverlay children={<UpdatePasswordForm />} />
-            </Suspense>
-          }
+          element={<ModalOverlay children={<UpdatePasswordForm />} />}
         />
       </Route>
 
@@ -139,22 +118,8 @@ const AppRoutes: React.FC = () => {
             </Suspense>
           }
         />
-        <Route
-          path="help"
-          element={
-            <Suspense fallback={<></>}>
-              <TopExpertsHelp />
-            </Suspense>
-          }
-        />
-        <Route
-          path="contact-us"
-          element={
-            <Suspense fallback={<></>}>
-              <TopExpertContact />
-            </Suspense>
-          }
-        />
+        <Route path="help" element={<TopExpertsHelp />} />
+        <Route path="contact-us" element={<TopExpertContact />} />
         <Route
           path="terms"
           element={
@@ -168,7 +133,7 @@ const AppRoutes: React.FC = () => {
       <Route
         path="/products/:serviceName"
         element={
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<ServiceDetailsLoader />}>
             <ServiceDetailsPage />{" "}
           </Suspense>
         }

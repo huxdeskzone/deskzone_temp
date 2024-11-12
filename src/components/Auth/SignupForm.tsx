@@ -85,7 +85,7 @@ const SignupForm: React.FC = () => {
 
   return (
     <div
-      className={`relative p-4 w-full max-w-2xl h-fit  ${styles.auth_form_container}`}
+      className={`relative p-4 mt-28 mb-10 w-full max-w-2xl h-fit  ${styles.auth_form_container}`}
     >
       <div className="relative rounded-lg shadow">
         <CloseFormModalBtn
@@ -96,7 +96,7 @@ const SignupForm: React.FC = () => {
           formTitle=" Get Started, Signup Here"
         />
 
-        <div className="flex gap-4 justify-center mt-2 text-sm font-medium text-gray-500 dark:text-gray-300">
+        <div className="flex gap-4 justify-center mt-2 text-sm font-medium text-gray-300">
           Have an account?
           <Link to="/auth/login" className={styles.account}>
             Sign in
@@ -123,7 +123,7 @@ const SignupForm: React.FC = () => {
               <Error key={index} message={msg || "something went wrong"} />
             ))}
 
-        <div className="px-4  md:px-5">
+        <div className="px-4 pb-10 md:px-5">
           <form onSubmit={onSubmitHandler} className="space-y-4" action="#">
             <div className="sm:flex max-md:gap-9 sm:justify-between items-center">
               <div className={styles.name_div}>
@@ -139,7 +139,7 @@ const SignupForm: React.FC = () => {
                   name="first-name"
                   className={`${
                     styles.form_input
-                  } text-sm w-full p-2.5  dark:text-white ${
+                  } text-sm w-full p-2.5  text-white ${
                     formError.field === "firstName" && styles.error_identifier
                   }`}
                   placeholder="John"
@@ -161,10 +161,10 @@ const SignupForm: React.FC = () => {
                   id="text-input"
                   className={`${
                     styles.form_input
-                  } text-sm w-full p-2.5  dark:text-white ${
+                  } text-sm w-full p-2.5  text-white ${
                     formError.field === "lastName" && styles.error_identifier
                   }`}
-                  placeholder="John"
+                  placeholder="Doe"
                   value={lastName}
                 />
               </div>
@@ -185,7 +185,7 @@ const SignupForm: React.FC = () => {
                 placeholder="johndoe@gmail.com"
                 className={`${
                   styles.form_input
-                } text-sm block w-full p-2.5  dark:text-white ${
+                } text-sm block w-full p-2.5  text-white ${
                   formError.field === "email" && styles.error_identifier
                 }`}
                 value={email}
@@ -207,7 +207,7 @@ const SignupForm: React.FC = () => {
                     name="password"
                     className={`${
                       styles.form_input
-                    } text-sm w-full p-2.5  dark:text-white ${
+                    } text-sm w-full p-2.5  text-white ${
                       formError.field === "password" && styles.error_identifier
                     }`}
                     placeholder="••••••••"
@@ -239,7 +239,7 @@ const SignupForm: React.FC = () => {
                     id="text-input"
                     className={`${
                       styles.form_input
-                    }  text-sm w-full p-2.5  dark:text-white ${
+                    }  text-sm w-full p-2.5  text-white ${
                       formError.field === "confirmPassword" &&
                       styles.error_identifier
                     }`}
@@ -259,7 +259,7 @@ const SignupForm: React.FC = () => {
             </div>
 
             <div className="flex justify-between">
-              <div className="flex items-start">
+              <div className="flex items-start mb-5">
                 <div className="flex items-center h-5">
                   <input
                     onChange={(event) => setTerms(event.target.checked)}
@@ -270,7 +270,7 @@ const SignupForm: React.FC = () => {
                 </div>
                 <label
                   htmlFor="terms and condition"
-                  className={`${styles.form_label} ms-2  font-medium text-gray-900 dark:text-gray-300`}
+                  className={`${styles.form_label} ms-2  font-medium  text-gray-300`}
                 >
                   I understand and agree to the{" "}
                   <a href="" className="underline">

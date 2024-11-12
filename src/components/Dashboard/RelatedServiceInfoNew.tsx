@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./ExpertServices.module.css";
 
-const ServiceInfo: React.FC<{
+const RelatedServiceInfoNew: React.FC<{
   businessLogo?: string;
   service?: string;
   businessName?: string;
@@ -42,7 +42,7 @@ const ServiceInfo: React.FC<{
       <div className="flex flex-shrink-0  justify-between -mt-5">
         <div></div>
         <div className="-mt-1">
-          <span className={`${styles.price_col}  text-13px font-semibold`}>
+          <span className={`${styles.price_col2}  text-13px font-semibold `}>
             <span className={styles.from}>From</span> ${Math.floor(price ?? 0)}
           </span>
         </div>
@@ -51,4 +51,4 @@ const ServiceInfo: React.FC<{
   );
 };
 
-export default ServiceInfo;
+export default RelatedServiceInfoNew;
