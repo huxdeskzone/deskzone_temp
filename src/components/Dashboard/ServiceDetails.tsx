@@ -79,7 +79,9 @@ const ServiceDetails: React.FC = () => {
           <div
             className={`${styles.close_container}  flex items-center h-20 gap-5 rounded-t`}
           >
-            <p className={`${styles.service} max-sm:text-xs`}>
+            <p
+              className={`${styles.service} text-xs lsm:text-sm md:text-sm lg:text-lg`}
+            >
               {data?.data?.title}
             </p>
 

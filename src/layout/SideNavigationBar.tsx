@@ -7,7 +7,7 @@ const SideNavigationBar: React.FC = () => {
 
   return (
     <section
-      className="fixed top-14 left-0  w-16 h-screen transition-transform -translate-x-full sm:translate-x-0"
+      className="fixed top-14 left-0 w-16 h-screen transition-transform -translate-x-full sm:translate-x-0"
       aria-label="Sidebar"
     >
       <div className={`h-full overflow-x-auto  ${styles.side_nav}`}>

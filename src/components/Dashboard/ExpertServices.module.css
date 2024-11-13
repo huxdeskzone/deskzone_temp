@@ -257,3 +257,21 @@
     padding-right: 2px;
   }
 }
+
+@media (min-width: 1536px) {
+  .price_col {
+    padding-right: 2px;
+  }
+}
+
+@media (min-width: 1596px) {
+  .price_col {
+    padding-right: 5px;
+  }
+}
+
+@media (min-width: 1604px) {
+  .price_col {
+    padding-right: 0;
+  }
+}

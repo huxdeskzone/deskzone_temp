@@ -153,22 +153,26 @@ const NavigationBar: React.FC = () => {
                     </MenuItem>
 
                     <MenuItem>
-                      <a
-                        href="#"
+                      <NavLink
+                        to="#"
                         className="block px-4 py-2 text-sm text-gray-700"
                         // onClick={onLogoutUserHander}
                       >
                         Purchases
-                      </a>
+                      </NavLink>
                     </MenuItem>
                     <MenuItem>
-                      <a
-                        href="#"
+                      <NavLink
+                        to={
+                          user?.role === "expert"
+                            ? "/expert/profile/wish-list"
+                            : "/client/profile/wish-list"
+                        }
                         className="block px-4 py-2 text-sm text-gray-700"
                         // onClick={onLogoutUserHander}
                       >
-                        Followed Experts
-                      </a>
+                        My Wish List
+                      </NavLink>
                     </MenuItem>
                     <MenuItem>
                       <a

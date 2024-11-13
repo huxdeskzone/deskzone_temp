@@ -15,8 +15,8 @@ import TopExpertsAbout from "../components/TopExperts/TopExpertsAbout";
 import TopExpertsHelp from "../components/TopExperts/TopExpertsHelp";
 import TopExpertTerms from "../components/TopExperts/TopExpertsTerms";
 import ExpertRoutes from "./ExpertRoutes";
-
 import Profile from "../components/Profile/Expert/Profile";
+import WishList from "../components/Profile/Expert/WishList";
 import Products from "../components/Profile/Expert/Products";
 import ClientGeneralProfile from "../components/Profile/Client/Profile";
 import ServicesLoader from "../components/commons/ServicesLoader";
@@ -167,6 +167,17 @@ const AppRoutes: React.FC = () => {
             </Suspense>
           }
         />
+
+        <Route
+          path="wish-list"
+          element={
+            <Suspense fallback={<></>}>
+              <ProtectedRoutes user={user}>
+                <WishList />
+              </ProtectedRoutes>
+            </Suspense>
+          }
+        />
       </Route>
 
       <Route
@@ -196,6 +207,17 @@ const AppRoutes: React.FC = () => {
             <Suspense fallback={<></>}>
               <ExpertRoutes user={user}>
                 <Products />
+              </ExpertRoutes>
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="wish-list"
+          element={
+            <Suspense fallback={<></>}>
+              <ExpertRoutes user={user}>
+                <WishList />
               </ExpertRoutes>
             </Suspense>
           }

@@ -84,3 +84,17 @@
   color: #fefefe;
   transition: ease-in-out 0.4s;
 }
+
+.wishlist_icon {
+  color: #e24c4c;
+}
+
+.wishlist_card {
+  border-bottom: 1px solid #555454 !important;
+}
+
+.wishlist_category {
+  border-bottom: 1px solid #555454;
+  color: #8a8989;
+  padding-bottom: 5px;
+}
